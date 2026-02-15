@@ -1,0 +1,872 @@
+/* =====================================================
+   JOB INSTANCES DIALOG - Execution History & Charts
+   ===================================================== */
+
+/* ✅ CRITICAL: Deshabilitar TODAS las animaciones de Angular Material dentro del dialog */
+.job-instances-dialog .ng-hide-add,
+.job-instances-dialog .ng-hide-remove,
+.job-instances-dialog .ng-enter,
+.job-instances-dialog .ng-leave,
+.job-instances-dialog .ng-move {
+  transition: none !important;
+  animation: none !important;
+  -webkit-transition: none !important;
+  -webkit-animation: none !important;
+}
+
+/* ✅ Asegurar que ng-hide funcione inmediatamente */
+.job-instances-dialog .ng-hide {
+  display: none !important;
+}
+
+/* Variables compartidas */
+:root {
+  --jobs-primary: #667eea;
+  --jobs-primary-dark: #5568d3;
+  --jobs-success: #4caf50;
+  --jobs-error: #f44336;
+  --jobs-warning: #ff9800;
+  --jobs-text: #2c3e50;
+  --jobs-text-secondary: #64748b;
+  --jobs-border: #e0e0e0;
+  --jobs-bg-light: #f8f9fa;
+}
+
+/* ===== BASE DIALOG ===== */
+.job-instances-dialog {
+  width: 1200px !important;
+  max-width: 95vw !important;
+  height: 95vh !important;
+  max-height: 95vh !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* ===== TOOLBAR (Compartido) ===== */
+.jobs-toolbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  min-height: 64px !important;
+  max-height: 64px !important;
+}
+
+.jobs-toolbar .md-toolbar-tools {
+  padding: 0 24px !important;
+  min-height: 64px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.jobs-toolbar .jobs-icon {
+  color: white !important;
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  margin: 0 !important;
+}
+
+.jobs-toolbar .jobs-header-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.jobs-toolbar .jobs-header-info h2 {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.jobs-toolbar .jobs-subtitle {
+  font-size: 13px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500 !important;
+}
+
+.jobs-toolbar .md-icon-button {
+  color: white !important;
+  margin: 0 !important;
+}
+
+.jobs-toolbar .md-icon-button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 50% !important;
+}
+
+/* ===== CONTENT ===== */
+.job-instances-content {
+  display: flex !important;
+  flex-direction: column !important;
+  height: calc(95vh - 64px) !important;
+  max-height: calc(95vh - 64px) !important;
+  overflow: hidden !important;
+  padding: 24px !important;
+  background: var(--jobs-bg-light) !important;
+}
+
+/* ===== LOADING & EMPTY STATES ===== */
+.loading-overlay,
+.empty-state {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 60px 20px !important;
+  background: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.job-instances-content .loading-overlay,
+.job-instances-content .empty-state {
+  flex: 1 !important;
+  min-height: 500px !important;
+}
+
+.loading-overlay p,
+.empty-state p {
+  margin-top: 16px !important;
+  color: var(--jobs-text-secondary) !important;
+  font-size: 14px !important;
+}
+
+.empty-state md-icon {
+  font-size: 64px !important;
+  width: 64px !important;
+  height: 64px !important;
+  color: #ddd !important;
+  margin-bottom: 16px !important;
+}
+
+.empty-state h3 {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: var(--jobs-text) !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.empty-state p {
+  margin: 0 !important;
+}
+
+/* ===== CHART SECTION ===== */
+.chart-section {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: white !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  padding-bottom: 24px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  margin-bottom: 0 !important;
+  overflow-y: auto !important;
+}
+
+.chart-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-bottom: 20px !important;
+  padding-bottom: 16px !important;
+  border-bottom: 2px solid var(--jobs-border) !important;
+  flex-shrink: 0 !important;
+  min-height: 60px !important;
+}
+
+.chart-header md-icon {
+  color: var(--jobs-primary) !important;
+  font-size: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+}
+
+.chart-header h3 {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: var(--jobs-text) !important;
+  margin: 0 !important;
+  flex: 1 !important;
+}
+
+.chart-header .chart-subtitle {
+  font-size: 13px !important;
+  color: var(--jobs-text-secondary) !important;
+  font-weight: 500 !important;
+  margin-right: 12px !important;
+}
+
+/* ===== CLOSE BUTTON EN HEADER ===== */
+.close-dialog-btn-header {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 0 16px !important;
+  height: 36px !important;
+  min-width: 100px !important;
+  border-radius: 6px !important;
+  background: linear-gradient(135deg, #ef5350 0%, #e53935 100%) !important;
+  color: white !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 6px rgba(239, 83, 80, 0.3) !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.close-dialog-btn-header:hover {
+  background: linear-gradient(135deg, #e53935 0%, #d32f2f 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 10px rgba(239, 83, 80, 0.4) !important;
+}
+
+.close-dialog-btn-header:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 4px rgba(239, 83, 80, 0.3) !important;
+}
+
+.close-dialog-btn-header md-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: white !important;
+  margin: 0 !important;
+}
+
+/* ===== ÁREA DE CONTENIDO PRINCIPAL (Chart/Empty/Loading) ===== */
+.chart-content-area {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  min-height: 450px !important;          /* ✅ Altura fija para evitar saltos */
+  max-height: 450px !important;
+  margin-bottom: 16px !important;        /* ✅ Reducido de 20px a 16px */
+}
+
+/* ✅ CRITICAL: Deshabilitar animaciones de Angular Material para ng-hide/ng-show */
+.chart-content-area .ng-hide-add,
+.chart-content-area .ng-hide-remove {
+  transition: none !important;
+  animation: none !important;
+}
+
+.chart-container {
+  position: absolute !important;         /* ✅ Posición absoluta para ocupar todo el espacio */
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  padding-bottom: 10px !important;       /* ✅ Reducido de 30px a 10px */
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ✅ Cuando está oculto con ng-show - SIN ANIMACIONES */
+.chart-container.ng-hide {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* ✅ FORCE: Sin transiciones ni animaciones en el container */
+.chart-container.ng-hide-add,
+.chart-container.ng-hide-remove {
+  transition: none !important;
+  animation: none !important;
+  display: none !important;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+/* ===== NO DATA MESSAGE - MEJORADO ===== */
+.no-data-message-wrapper {
+  position: absolute !important;         /* ✅ Posición absoluta para ocupar todo el espacio */
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 60px 20px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ✅ Cuando está oculto con ng-show */
+.no-data-message-wrapper.ng-hide {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* ✅ FORCE: Sin transiciones ni animaciones */
+.no-data-message-wrapper.ng-hide-add,
+.no-data-message-wrapper.ng-hide-remove {
+  transition: none !important;
+  animation: none !important;
+  display: none !important;
+}
+
+/* ===== LOADING STATE PARA CHART ===== */
+.chart-loading-overlay {
+  position: absolute !important;         /* ✅ Posición absoluta para ocupar todo el espacio */
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  z-index: 10 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ✅ Cuando está oculto con ng-show */
+.chart-loading-overlay.ng-hide {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* ✅ FORCE: Sin transiciones ni animaciones */
+.chart-loading-overlay.ng-hide-add,
+.chart-loading-overlay.ng-hide-remove {
+  transition: none !important;
+  animation: none !important;
+  display: none !important;
+}
+
+.chart-loading-overlay p {
+  margin-top: 16px !important;
+  color: var(--jobs-text-secondary) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.no-data-message {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  max-width: 500px !important;
+}
+
+.no-data-icon {
+  font-size: 72px !important;            /* ✅ Icono más grande */
+  width: 72px !important;
+  height: 72px !important;
+  color: #ef5350 !important;             /* ✅ Rojo más suave */
+  margin-bottom: 20px !important;
+}
+
+.no-data-message h3 {
+  font-size: 20px !important;            /* ✅ Título más grande */
+  font-weight: 600 !important;
+  color: #d32f2f !important;
+  margin: 0 0 12px 0 !important;
+  line-height: 1.4 !important;
+}
+
+.no-data-message p {
+  font-size: 15px !important;            /* ✅ Texto más legible */
+  color: #757575 !important;
+  margin: 0 !important;
+  line-height: 1.5 !important;
+}
+
+/* ===== TIME RANGE CONTROL (rzSlider) ===== */
+.time-range-control {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 20px;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 12px;           /* ✅ Reducido de 16px a 12px */
+  border: 2px solid #e8ecff;
+  flex-shrink: 0;
+}
+
+.time-range-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--jobs-border);
+}
+
+.time-range-header md-icon {
+  color: var(--jobs-primary);
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.time-range-header span {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--jobs-text);
+  flex: 1;
+}
+
+.reset-range-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #fff3e0;
+  border: 1px solid #ff9800;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e65100;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-range-btn:hover {
+  background: #ffe0b2;
+  transform: translateY(-1px);
+}
+
+.reset-range-btn md-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #e65100;
+}
+
+.rz-slider-container {
+  padding: 20px 20px 25px 20px;
+  margin: 0;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+/* Validation Warning */
+.time-range-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #fff3e0;
+  border: 1px solid #ff9800;
+  border-radius: 6px;
+  color: #e65100;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.time-range-warning md-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #ff9800;
+}
+
+/* Quick Presets */
+.time-range-presets {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.presets-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  margin-right: 8px;
+}
+
+.preset-range-btn {
+  padding: 6px 12px;
+  background: white;
+  border: 2px solid var(--jobs-border);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--jobs-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-range-btn:hover {
+  border-color: var(--jobs-primary);
+  background: rgba(102, 126, 234, 0.05);
+  transform: translateY(-1px);
+}
+
+/* ===== TIME INTERVAL CONTROL ===== */
+.time-interval-control {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  padding: 16px 20px !important;
+  background: linear-gradient(135deg, #f8f9ff 0%, #fafbff 100%) !important;
+  border-radius: 8px !important;
+  margin-bottom: 12px !important;        /* ✅ Reducido de 20px a 12px */
+  border: 1px solid #e8ecff !important;
+  flex-shrink: 0 !important;
+}
+
+.interval-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  white-space: nowrap !important;
+  color: var(--jobs-text) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  min-width: 140px !important;
+}
+
+.interval-label md-icon {
+  color: var(--jobs-primary) !important;
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.interval-slider-wrapper {
+  flex: 1;
+  padding: 10px;
+  min-width: 300px;
+}
+
+.interval-presets {
+  display: flex !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.preset-btn {
+  padding: 8px 14px !important;
+  background: white !important;
+  border: 2px solid var(--jobs-border) !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--jobs-text) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  min-width: 45px !important;
+  text-align: center !important;
+}
+
+.preset-btn:hover:not([disabled]) {
+  border-color: var(--jobs-primary) !important;
+  background: rgba(102, 126, 234, 0.05) !important;
+  transform: translateY(-1px) !important;
+}
+
+.preset-btn.active {
+  background: linear-gradient(135deg, var(--jobs-primary) 0%, var(--jobs-primary-dark) 100%) !important;
+  color: white !important;
+  border-color: var(--jobs-primary) !important;
+  box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3) !important;
+}
+
+.preset-btn[disabled] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+.interval-loading {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.interval-loading md-progress-circular {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* ===== PAGINATION (DENTRO DE CHART-SECTION) ===== */
+.pagination-controls {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  padding: 8px 16px !important;
+  background: white !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  flex-shrink: 0 !important;
+  height: auto !important;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+  border-top: 1px solid var(--jobs-border) !important;
+  position: relative !important;
+}
+
+.pagination-btn {
+  margin: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease !important;
+}
+
+.pagination-btn:not([disabled]):hover {
+  background: rgba(102, 126, 234, 0.1) !important;
+}
+
+.pagination-btn[disabled] {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+.pagination-btn md-icon {
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  color: var(--jobs-primary) !important;
+}
+
+.pagination-btn[disabled] md-icon {
+  color: #999 !important;
+}
+
+.page-indicator {
+  font-size: 14px !important;
+  color: var(--jobs-text-secondary) !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+}
+
+.page-indicator strong {
+  color: var(--jobs-text) !important;
+  font-weight: 600 !important;
+}
+
+/* ===== CLOSE BUTTON IN HEADER ===== */
+.close-dialog-btn-header {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 0 20px !important;
+  height: 38px !important;
+  min-width: 120px !important;
+  border-radius: 6px !important;
+  background: linear-gradient(135deg, #ef5350 0%, #e53935 100%) !important;
+  color: white !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 6px rgba(239, 83, 80, 0.3) !important;
+  margin: 0 0 0 auto !important;
+  flex-shrink: 0 !important;
+}
+
+.close-dialog-btn-header:hover {
+  background: linear-gradient(135deg, #e53935 0%, #d32f2f 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 10px rgba(239, 83, 80, 0.4) !important;
+}
+
+.close-dialog-btn-header:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(239, 83, 80, 0.3) !important;
+}
+
+.close-dialog-btn-header md-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: white !important;
+  margin: 0 !important;
+}
+
+/* ===== rzSlider STYLES ===== */
+.rzslider {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 4px;
+  margin: 35px 0 10px 0;
+  vertical-align: middle;
+  user-select: none;
+}
+
+.rzslider .rz-bar {
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+}
+
+.rzslider .rz-selection {
+  position: absolute;
+  background: linear-gradient(90deg, #667eea 0%, #4caf50 100%);
+  height: 4px;
+  border-radius: 2px;
+}
+
+/* Pointer estilo picker profesional (línea vertical con círculo en la punta) */
+.rzslider .rz-pointer {
+  position: absolute;
+  width: 8px;
+  height: 40px;
+  top: -18px;
+  background: linear-gradient(180deg, #667eea 0%, #5568d3 100%);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.6);
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.2s ease;
+}
+
+/* Círculo en la punta (arriba) - MUY PEQUEÑO */
+.rzslider .rz-pointer::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: #667eea;
+  border: 1.5px solid white;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(102, 126, 234, 0.4);
+  transition: all 0.2s ease;
+}
+
+.rzslider .rz-pointer:hover {
+  transform: scaleY(1.1) scaleX(1.3);
+  box-shadow: 0 3px 12px rgba(102, 126, 234, 0.8);
+}
+
+.rzslider .rz-pointer:hover::before {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.7);
+}
+
+.rzslider .rz-pointer.rz-active {
+  transform: scaleY(1.15) scaleX(1.4);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.9);
+}
+
+.rzslider .rz-pointer.rz-active::before {
+  transform: translateX(-50%) scale(1.15);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.8);
+}
+
+/* Pointer derecho (verde) - Fecha "To" */
+.rzslider .rz-pointer.rz-max-h {
+  background: linear-gradient(180deg, #4caf50 0%, #388e3c 100%);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.6);
+}
+
+.rzslider .rz-pointer.rz-max-h::before {
+  background: #4caf50;
+  box-shadow: 0 2px 6px rgba(76, 175, 80, 0.5);
+}
+
+.rzslider .rz-pointer.rz-max-h:hover {
+  box-shadow: 0 3px 12px rgba(76, 175, 80, 0.8);
+}
+
+.rzslider .rz-pointer.rz-max-h:hover::before {
+  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.7);
+}
+
+.rzslider .rz-pointer.rz-max-h.rz-active {
+  box-shadow: 0 4px 16px rgba(76, 175, 80, 0.9);
+}
+
+.rzslider .rz-pointer.rz-max-h.rz-active::before {
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.8);
+}
+
+/* rzSlider - Bubbles mejorados */
+.rzslider .rz-bubble {
+  position: absolute;
+  bottom: 25px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  background: white;
+  color: #2c3e50;
+  border: 2px solid #667eea;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.3px;
+}
+
+/* Ocultar los bubbles de floor y ceil (límites) para evitar círculos extras */
+.rzslider .rz-bubble.rz-limit {
+  display: none !important;
+}
+
+.rzslider .rz-bubble.rz-limit.rz-ceil {
+  border-color: #4caf50;
+  display: none !important;
+}
+
+.rzslider .rz-active .rz-bubble {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  box-shadow: 0 3px 12px rgba(102, 126, 234, 0.4);
+}
+
+.interval-slider-wrapper .rzslider .rz-bubble {
+  border-color: #2196f3;
+}
+
+.interval-slider-wrapper .rzslider .rz-active .rz-bubble {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  color: white;
+  border-color: #2196f3;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .time-interval-control {
+    flex-wrap: wrap !important;
+  }
+  
+  .interval-slider-wrapper {
+    flex: 1 1 100% !important;
+    order: 2 !important;
+  }
+  
+  .interval-presets {
+    order: 3 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .job-instances-dialog {
+    min-width: 95vw !important;
+  }
+}

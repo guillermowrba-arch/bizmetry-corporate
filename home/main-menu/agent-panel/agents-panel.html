@@ -1,0 +1,390 @@
+<head>
+  <link rel="stylesheet" href="/home/main-menu/agent-panel/agent-panel.css">
+</head>
+
+
+<md-dialog aria-label="Agents Panel" class="agents-panel-dialog"
+  style="width: 1900px; max-width: 98vw; height: 90vh; display: flex; flex-direction: column;">
+
+  <md-toolbar class="agents-panel-toolbar">
+    <div class="md-toolbar-tools">
+
+      <!-- Icono -->
+      <md-icon class="agents-panel-icon">dns</md-icon>
+
+      <!-- Info del panel -->
+      <div class="agents-panel-header-info">
+        <h2>Connected Agents</h2>
+        <span class="agents-panel-subtitle">Manage and monitor your agents</span>
+      </div>
+
+      <!-- Spacer -->
+      <span flex></span>
+
+      <!-- Stats Badge -->
+      <div class="agents-panel-stats-badge">
+        <md-icon>computer</md-icon>
+        <span>{{ filteredAgents.length }} Total</span>
+      </div>
+
+      <div class="agents-panel-stats-badge badge-online">
+        <md-icon>check_circle</md-icon>
+        <span>{{ getOnlineCount() }} Online</span>
+      </div>
+
+      <div class="agents-panel-stats-badge badge-offline" ng-show="getOfflineCount() > 0">
+        <md-icon>cancel</md-icon>
+        <span>{{ getOfflineCount() }} Offline</span>
+      </div>
+
+      <!-- Close Button -->
+      <md-button class="md-icon-button" ng-click="close()" aria-label="Close">
+        <md-icon>close</md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content style="flex: 1; overflow: hidden; padding: 0; background: #fafafa;">
+
+    <!-- ✅ CONTROLES FIJOS CON SPACING Y ALINEACIÓN -->
+    <div class="agents-controls-sticky">
+      <!-- Filtros y controles -->
+      <div class="agents-controls-card">
+        <div layout="row" layout-align="start center" layout-wrap style="gap: 12px; align-items: center;">
+
+          <!-- Filtro Profile -->
+          <md-input-container style="width: 150px; margin: 0; padding: 0;">
+            <label>Profile</label>
+            <md-select ng-model="selectedProfile" ng-change="updateFilters()">
+              <md-option value="ALL">All</md-option>
+              <md-option ng-repeat="profile in profiles" value="{{ profile.id }}">
+                {{ profile.profileName }}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <!-- Filtro Environment Type -->
+          <md-input-container style="width: 150px; margin: 0; padding: 0;">
+            <label>Environment</label>
+            <md-select ng-model="selectedEnvType" ng-change="updateFilters()">
+              <md-option value="ALL">All</md-option>
+              <md-option ng-repeat="envType in envTypes" value="{{ envType.refObjectId }}">
+                {{ envType.refObjectLabel }}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <!-- Filtro Status -->
+          <md-input-container style="width: 150px; margin: 0; padding: 0;">
+            <label>Status</label>
+            <md-select ng-model="selectedStatus" ng-change="updateFilters()">
+              <md-option value="ALL">All</md-option>
+              <md-option ng-repeat="status in statuses" value="{{ status }}">
+                {{ status | uppercase }}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <!-- Separador -->
+          <div style="width: 1px; height: 40px; background-color: #e0e0e0; align-self: center;"></div>
+
+          <!-- Búsqueda -->
+          <md-input-container style="width: 300px; margin: 0; padding: 0; margin-top: -2px;">
+            <label>Search</label>
+            <input ng-model="searchText" ng-change="updateFilters()" placeholder="Agent name...">
+          </md-input-container>
+
+          <!-- Espaciador entre Search y Clear -->
+          <div style="width: 32px;"></div>
+
+          <!-- Clear button -->
+          <md-button class="md-raised" ng-click="clearFilters()"
+            style="background-color: #ff9800; color: white; margin: 0; height: 40px; align-self: center;">
+            <md-icon>refresh</md-icon> Clear
+          </md-button>
+
+          <span flex></span>
+
+          <!-- Refresh interval slider -->
+          <div style="min-width: 220px; align-self: center;">
+            <label
+              style="font-size: 12px; color: #757575; text-transform: uppercase; margin-bottom: 4px; display: block;">
+              Refresh: {{ refreshInterval }}s
+            </label>
+            <md-slider ng-model="refreshInterval" min="1" max="60" step="1" ng-change="updateInterval()"
+              style="margin: 0;">
+            </md-slider>
+          </div>
+        </div>
+
+        <!-- Summary badges -->
+        <div layout="row" style="gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
+          <div
+            style="background-color: #e3f2fd; color: #1976d2; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;">
+            <md-icon style="font-size: 16px; vertical-align: middle; margin-right: 4px;">dns</md-icon>
+            {{ filteredAgents.length }} Agent{{ filteredAgents.length !== 1 ? 's' : '' }}
+          </div>
+          <div
+            style="background-color: #e8f5e9; color: #2e7d32; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;">
+            <md-icon style="font-size: 16px; vertical-align: middle; margin-right: 4px;">check_circle</md-icon>
+            {{ getOnlineCount() }} Online
+          </div>
+          <div
+            style="background-color: #ffebee; color: #c62828; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;"
+            ng-show="getOfflineCount() > 0">
+            <md-icon style="font-size: 16px; vertical-align: middle; margin-right: 4px;">cancel</md-icon>
+            {{ getOfflineCount() }} Offline
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ ÁREA SCROLLEABLE - COMPLETA -->
+    <div class="agents-scrollable-content">
+
+      <!-- Loading indicator -->
+      <div ng-show="loading" layout="row" layout-align="center center"
+        style="min-height: 400px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin: 0 24px;">
+        <div layout="column" layout-align="center center" style="gap: 16px;">
+          <md-progress-circular md-mode="indeterminate" md-diameter="50"></md-progress-circular>
+          <span style="color: #757575; font-size: 14px;">Loading agents...</span>
+        </div>
+      </div>
+
+      <!-- Tabla de agentes -->
+      <div ng-show="!loading && filteredAgents && filteredAgents.length > 0"
+        style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; margin: 0 24px;">
+        <div style="overflow-y: auto; overflow-x: auto; max-height: calc(90vh - 320px);">
+          <table class="agents-table" style="width: 100%; min-width: 1440px; border-collapse: collapse;">
+            <thead style="position: sticky; top: 0; background-color: #f5f5f5; z-index: 10;">
+              <tr>
+                <th style="width: 120px;">Agent</th>
+                <th style="width: 100px;">Profile</th>
+                <th style="width: 100px;">Environment</th>
+                <th style="width: 100px;">Type</th>
+                <th style="width: 200px;">Last Sync</th>
+                <th style="width: 100px;">Uptime</th>
+                <th style="width: 100px;">Status</th>
+                <th style="width: 80px;">Ping</th>
+                <th style="width: 80px;">CPU</th>
+                <th style="width: 80px;">Memory</th>
+                <th style="width: 80px;">Log Press.</th>
+                <th style="width: 60px;">Metrics</th>
+                <th style="width: 420px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="agent in filteredAgents track by agent.agentId" class="agent-row">
+
+                <!-- Agent Name -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <md-icon style="font-size: 18px; color: #757575;">computer</md-icon>
+                    <span style="font-size: 14px; color: #424242; font-weight: 600;">{{ agent.agentName }}</span>
+                  </div>
+                </td>
+
+                <!-- Profile -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <span style="font-size: 13px; color: #616161;">{{ agent.profileName }}</span>
+                </td>
+
+                <!-- Environment -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <span style="font-size: 13px; color: #616161;">{{ agent.environmentName }}</span>
+                </td>
+
+                <!-- Env Type -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <generic-type-pill type="agent.envTypeName"></generic-type-pill>
+                </td>
+
+                <!-- Last Sync -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <span
+                    style="font-size: 12px; color: #757575; font-family: 'Courier New', monospace; white-space: nowrap;">
+                    {{ agent.lastSyncupTs ? (agent.lastSyncupTs | date:'medium') : 'N/A' }}
+                  </span>
+                </td>
+
+                <!-- Uptime -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <span style="font-size: 13px; color: #424242; font-weight: 500;">{{ formatUptime(agent.upTime)
+                    }}</span>
+                </td>
+
+                <!-- Status -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <agent-status-pill status="{{ agent.agentStatus }}" profile-dirty-flag="agent.profileDirtyFlag">
+                  </agent-status-pill>
+                </td>
+
+                <!-- Ping -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <div class="metric-bar-container">
+                    <div class="metric-bar" ng-style="{ 
+                  width: (agent.maxLatency !== agent.minLatency && agent.pingLatency !== 0) ? 
+                    ((agent.pingLatency - agent.minLatency) / (agent.maxLatency - agent.minLatency)) * 100 + '%' : '0%',
+                  background: getMetricColor(agent.pingLatency, agent.minLatency, agent.maxLatency) }">
+                    </div>
+                    <span class="metric-value">{{ agent.pingLatency }}ms</span>
+                  </div>
+                </td>
+
+                <!-- CPU -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <div class="metric-bar-container">
+                    <div class="metric-bar" ng-style="{ 
+                  width: agent.avgCpuUsage + '%',
+                  background: getPercentageColor(agent.avgCpuUsage) }">
+                    </div>
+                    <span class="metric-value">{{ agent.avgCpuUsage }}%</span>
+                  </div>
+                </td>
+
+                <!-- Memory -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <div class="metric-bar-container">
+                    <div class="metric-bar" ng-style="{ 
+                  width: agent.avgMemUsage + '%',
+                  background: getPercentageColor(agent.avgMemUsage) }">
+                    </div>
+                    <span class="metric-value">{{ agent.avgMemUsage }}%</span>
+                  </div>
+                </td>
+
+                <!-- Log Pressure -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0;">
+                  <div class="metric-bar-container">
+                    <div class="metric-bar" ng-style="{ 
+                  width: agent.logPressure + '%',
+                  background: getPercentageColor(agent.logPressure) }">
+                    </div>
+                    <span class="metric-value">{{ agent.logPressure }}%</span>
+                  </div>
+                </td>
+
+                <!-- Metrics Count -->
+                <td style="padding: 16px; border-bottom: 1px solid #e0e0e0; text-align: center;">
+                  <span
+                    style="background-color: #e3f2fd; color: #1565c0; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 500;">
+                    {{ agent.metricsCount }}
+                  </span>
+                </td>
+
+                <!-- Actions -->
+                <td style="padding: 12px 16px; border-bottom: 1px solid #e0e0e0;">
+                  <div layout="row" layout-align="start center" style="gap: 6px; flex-wrap: nowrap;">
+                    <!-- Restart -->
+                    <md-button class="md-icon-button action-btn" ng-click="restartAgent(agent)"
+                      ng-disabled="agent.agentStatus !== 'ONLINE'">
+                      <md-icon style="color: #f57c00;">autorenew</md-icon>
+                      <md-tooltip md-direction="top">{{ agent.agentStatus === 'ONLINE' ? 'Restart' : 'Only ONLINE'
+                        }}</md-tooltip>
+                    </md-button>
+
+                    <!-- Edit -->
+                    <md-button class="md-icon-button action-btn" ng-click="editAgent(agent)"
+                      ng-disabled="agent.agentStatus !== 'ONLINE' && agent.agentStatus !== 'OFFLINE'">
+                      <md-icon style="color: #1976d2;">edit</md-icon>
+                      <md-tooltip md-direction="top">Edit</md-tooltip>
+                    </md-button>
+
+                    <!-- Stop -->
+                    <md-button class="md-icon-button action-btn" ng-click="stopAgent(agent)"
+                      ng-disabled="agent.agentStatus !== 'ONLINE'">
+                      <md-icon style="color: #d32f2f;">stop</md-icon>
+                      <md-tooltip md-direction="top">{{ agent.agentStatus === 'ONLINE' ? 'Stop' : 'Only ONLINE'
+                        }}</md-tooltip>
+                    </md-button>
+
+                    <!-- Logs -->
+                    <md-button class="md-icon-button action-btn" ng-click="viewLogs(agent)">
+                      <md-icon style="color: #388e3c;">article</md-icon>
+                      <md-tooltip md-direction="top">View Logs</md-tooltip>
+                    </md-button>
+
+                    <!-- Download -->
+                    <md-button class="md-icon-button action-btn" ng-click="openDownloadDialog(agent)"
+                      ng-disabled="isAnyDownloadInProgress || !agent.isPubliclyExposed || !agent.isInternallyExposed">
+                      <md-icon style="color: #6a1b9a;">cloud_download</md-icon>
+                      <md-tooltip md-direction="top">
+                        {{ (isAnyDownloadInProgress || !agent.isPubliclyExposed || !agent.isInternallyExposed) ?
+                        'Missing security config' : 'Download' }}
+                      </md-tooltip>
+                    </md-button>
+
+                    <md-button class="md-icon-button action-btn" ng-click="openAgentMetrics(agent)">
+                      <md-icon style="color: #00897b;">timeline</md-icon>
+                      <md-tooltip md-direction="top">Real-time Metrics</md-tooltip>
+                    </md-button>
+
+                    <!-- Divider -->
+                    <div style="width: 1px; height: 28px; background-color: #e0e0e0; margin: 0 8px;"></div>
+
+                    <!-- Status icons group -->
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                      <!-- Public exposure -->
+                      <md-icon ng-style="{'color': agent.isPubliclyExposed ? '#4caf50' : '#bdbdbd'}"
+                        style="font-size: 18px; width: 18px; height: 18px; min-width: 18px;">
+                        public
+                        <md-tooltip md-direction="top">{{ agent.isPubliclyExposed ? 'Publicly exposed' : 'Not public'
+                          }}</md-tooltip>
+                      </md-icon>
+
+                      <!-- Internal exposure -->
+                      <md-icon ng-style="{'color': agent.isInternallyExposed ? '#4caf50' : '#bdbdbd'}"
+                        style="font-size: 18px; width: 18px; height: 18px; min-width: 18px;">
+                        visibility
+                        <md-tooltip md-direction="top">{{ agent.isInternallyExposed ? 'Internally exposed' : 'Not
+                          internal' }}</md-tooltip>
+                      </md-icon>
+
+                      <!-- Reachable status -->
+                      <md-icon ng-style="{'color': agent.isReachable ? '#4caf50' : '#f44336'}"
+                        style="font-size: 18px; width: 18px; height: 18px; min-width: 18px;">
+                        {{ agent.isReachable ? 'wifi' : 'wifi_off' }}
+                        <md-tooltip md-direction="top">{{ agent.isReachable ? 'Reachable' : 'Not reachable'
+                          }}</md-tooltip>
+                      </md-icon>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div ng-show="!loading && (!filteredAgents || filteredAgents.length === 0)"
+        style="background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 80px 40px; text-align: center; min-height: 400px; margin: 0 24px;">
+
+        <div style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); 
+                border-radius: 50%; 
+                width: 120px; 
+                height: 120px; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center;
+                margin: 0 auto 32px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                animation: pulse-icon 2s ease-in-out infinite;">
+          <md-icon style="font-size: 64px; color: #1976d2; width: 64px; height: 64px;">radar</md-icon>
+        </div>
+
+        <h3 style="font-size: 24px; font-weight: 600; color: #424242; margin: 0 0 16px 0;">
+          No Connected Agents Found
+        </h3>
+
+        <p style="font-size: 15px; color: #757575; max-width: 500px; line-height: 1.6; margin: 0 auto;">
+          No agents match your current filters. Try adjusting your search or use the <strong>Clear</strong> button to
+          reset.
+        </p>
+      </div>
+
+    </div>
+
+  </md-dialog-content>
+</md-dialog>

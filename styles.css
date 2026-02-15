@@ -1,0 +1,537 @@
+/* General Styles */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: url("/assets/background/bizmetry-background.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Arial', sans-serif;
+  color: white;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  
+  color: white;
+}
+
+.login-container-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.main-container {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.register-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px 24px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+md-input-container {
+  width: 100%;
+  color: white;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+md-input-container label,
+md-input-container .md-placeholder {
+  color: white !important;
+}
+
+md-input-container input,
+md-input-container textarea {
+  color: white;
+}
+
+/* Resetear margen superior en md-dialog-content para evitar gap */
+/* PERO: Excepto en diálogos con tabs */
+md-dialog-content:not(.md-tabs-content):not([layout="column"]) {
+  padding-top: 0 !important;
+}
+
+md-dialog-content > div:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* CRITICAL: Permitir padding en tabs content */
+md-dialog.create-resource-dialog md-tab-content > md-dialog-content,
+md-dialog.edit-resource-dialog md-tab-content > md-dialog-content,
+md-dialog.bm-dialog-width md-tab-content > md-dialog-content,
+md-dialog.profile-details-dialog md-tab-content > md-dialog-content,
+md-dialog[aria-label="Profile Details"] md-tab-content > md-dialog-content {
+  padding-top: 40px !important;
+}
+
+/* También permitir padding en el primer div dentro de tabs */
+md-dialog.create-resource-dialog md-tab-content > md-dialog-content > div:first-child,
+md-dialog.edit-resource-dialog md-tab-content > md-dialog-content > div:first-child,
+md-dialog.bm-dialog-width md-tab-content > md-dialog-content > div:first-child,
+md-dialog.profile-details-dialog md-tab-content > md-dialog-content > div:first-child,
+md-dialog[aria-label="Profile Details"] md-tab-content > md-dialog-content > div:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+h1, h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin-bottom: 20px;
+}
+
+
+.ng-invalid.ng-dirty ~ .error-message,
+.ng-invalid.ng-touched ~ .error-message {
+  display: block;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.half-width {
+  flex: 1 1 48%;
+  min-width: 200px;
+}
+
+.full-width {
+  flex: 1 1 100%;
+}
+
+.error-container {
+  background: rgba(255, 0, 0, 0.1);
+  border-left: 4px solid #ff5252;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.terms {
+  margin: 30px 0 16px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+md-button.full-width {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* 🔐 Login-specific styles */
+.login-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.login-container h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-container md-input-container {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.login-container md-button {
+  width: 48%;
+  margin-right: 4%;
+  color: white;
+}
+
+.login-container md-button:last-child {
+  margin-right: 0;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+.login-container md-button:last-child:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 🎯 Estilo mejorado para el botón de registro */
+.md-button.register-button {
+  background: linear-gradient(135deg, #ff4081, #f50057);
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 64, 129, 0.4);
+  text-transform: uppercase;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.md-button.register-button:hover {
+  background: linear-gradient(135deg, #f50057, #c51162);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245, 0, 87, 0.5);
+}
+
+.md-button.register-button:disabled {
+  background: #ccc;
+  color: #666;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ✅ Mejorar alineación del texto de términos */
+.terms {
+  margin: 20px 0 10px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.terms input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* ✅ Mejorar estilo del link */
+.terms a {
+  color: #add8ff;
+  text-decoration: underline;
+}
+
+/* ✅ Ocultar "Already a member?" o darle estilo limpio si decidís dejarlo */
+.already-member {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+  color: #ccc;
+}
+
+.already-member a {
+  color: #add8ff;
+  text-decoration: underline;
+}
+
+/* 💊 Unifica el tamaño y forma de pills tanto en md-chip como en view */
+md-chip span,
+.enum-pill {
+  border-radius: 16px !important;
+  font-weight: 500 !important;
+  padding: 4px 22px 4px 14px !important;
+  font-size: 1em !important;
+  min-height: 32px !important;
+  line-height: 1.7 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+}
+
+/* --- FINAL: Fuerza layout horizontal en edición y alinea la X --- */
+md-chips .md-chips,
+md-chips .md-chips-wrap {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px;
+  padding: 0 !important;
+}
+
+md-chip {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-height: 36px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 6px 6px 0 !important;
+  padding: 0 !important;
+}
+
+/* -- CHIP CONTENT + REMOVE ICON FINAL OVERRIDE -- */
+md-chip .md-chip-content {
+  box-shadow: none !important;
+  border-radius: 16px !important;
+  padding-right: 8px !important;  /* Aire general, pero ahora más chico */
+  padding-left: 0 !important;
+  min-height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+md-chip .md-chip-remove {
+  align-self: center !important;
+  margin-left: 2px !important;     /* Apenas pegada al texto */
+  margin-right: 0 !important;      /* No la empuja al borde */
+  padding-right: 10px !important;  /* Aire entre la X y el borde derecho */
+  font-size: 1.1em !important;
+  height: 22px !important;
+  width: 22px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  background: transparent !important;
+}
+
+md-chip .md-chip-remove md-icon {
+  margin: 0 auto !important;
+  display: block !important;
+  height: 18px !important;
+  width: 18px !important;
+}
+
+/* --- DESHABILITAR INTERACCIÓN EN X y INPUT DE MD-CHIPS SI ESTÁ DISABLED --- */
+md-chips[ng-disabled="true"] .md-chip-remove,
+md-chips[disabled] .md-chip-remove {
+  pointer-events: none !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* 🔒 BLOQUEA EL INPUT DE AGREGAR NUEVOS ENUMS SIN OCULTARLO */
+md-chips[ng-disabled="true"] .md-chips-input,
+md-chips[disabled] .md-chips-input {
+  pointer-events: none !important;
+  opacity: 0.4 !important;
+  background: #f3f3f3 !important;
+  color: #bbb !important;
+  cursor: not-allowed !important;
+}
+
+/* Fallback: bloquea todos los inputs internos si alguna variante se escapa */
+md-chips[ng-disabled="true"] input,
+md-chips[disabled] input {
+  pointer-events: none !important;
+  background: #f3f3f3 !important;
+  color: #bbb !important;
+  cursor: not-allowed !important;
+}
+
+/* 🔒 BLOQUEA CUALQUIER INTERACCIÓN INTERNA en md-chips cuando está disabled */
+md-chips[ng-disabled="true"] *,
+md-chips[disabled] * {
+  pointer-events: none !important;
+  user-select: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+/* Específicamente, los input y textarea no muestran caret ni permiten edición */
+md-chips[ng-disabled="true"] input,
+md-chips[disabled] input,
+md-chips[ng-disabled="true"] textarea,
+md-chips[disabled] textarea {
+  pointer-events: none !important;
+  background: #f3f3f3 !important;
+  color: #bbb !important;
+  cursor: not-allowed !important;
+  caret-color: transparent !important;
+  user-select: none !important;
+}
+
+/* Save button - verde fuerte habilitado, gris deshabilitado */
+.md-button.md-primary.save-btn-enabled {
+  background: linear-gradient(135deg, #43a047, #a5d6a7) !important;
+  color: #fff !important;
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(67, 160, 71, 0.15);
+  opacity: 1 !important;
+  transition: opacity 0.2s, background 0.2s;
+  border: none !important;
+}
+
+.md-button.md-primary.save-btn-disabled,
+.md-button.md-primary:disabled,
+.md-button[disabled] {
+  background: #b0bec5 !important;
+  color: #ececec !important;
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  font-weight: normal;
+  border: none !important;
+}
+
+.env-disabled {
+  opacity: 0.6; /* Hace que todo el environment parezca "atenuado" */
+}
+
+.env-pill {
+  display: inline-block;
+  padding: 4px 10px;  /* Reducido el padding */
+  border-radius: 16px; /* Bordes menos redondeados */
+  font-size: 0.85em;  /* Fuente más pequeña */
+  font-weight: 600;   /* Peso de fuente ligeramente más liviano */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  /* Eliminar vertical-align: middle, ya no es necesario */
+}
+
+
+/* Eliminar fondo negro y sombra del md-toast */
+body md-toast.login-success-toast {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* Contenido interno del toast */
+.login-success-toast-content {
+  background-color: #e8f5e9; /* verde pastel claro */
+  color: #2e7d32;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 16px 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ícono */
+.login-success-toast-content .material-icons {
+  margin-right: 12px;
+  font-size: 24px;
+  color: #2e7d32;
+}
+/* Animación entrada + salida */
+@keyframes slideFadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+
+
+  
+}
+
+
+.custom-tooltip {
+  max-width: 300px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: normal;
+  padding-right: 4px;
+}
+
+.custom-tooltip ul {
+  margin: 4px 0 0 12px;
+  padding-left: 0;
+  list-style-type: disc;
+}
+
+.custom-tooltip li {
+  margin-bottom: 2px;
+}
+
+/* Estilo para el botón delete account */
+.md-button.md-raised.md-warn {
+  display: inline-flex;          /* Asegura que el ícono y el texto se alineen horizontalmente */
+  align-items: center;           /* Centra verticalmente el contenido */
+  justify-content: center;       /* Alinea el contenido en el centro */
+  height: 40px;
+  padding: 8px 16px;             /* Ajusta el padding para más espacio */
+  font-size: 14px;               /* Ajusta el tamaño de la fuente */
+  font-weight: bold;             /* Enfatiza el texto */
+  width: auto;                   /* El ancho se ajustará al contenido */
+  min-width: 120px;              /* Evita que el botón sea muy pequeño */
+  white-space: nowrap;           /* Asegura que el texto no se rompa en varias líneas */
+}
+
+/* Estilo para el ícono dentro del botón */
+.md-button.md-raised.md-warn md-icon {
+  margin-right: 8px;             /* Espacio entre el ícono y el texto */
+}
+
+/* Efecto hover para el botón con cambio de color */
+.md-button.md-primary:hover {
+  background-color: #0f8513; /* Más intenso para md-primary (verde) */
+}
+
+.md-button.md-warn:hover {
+  background-color: #cf0e0b; /* Más intenso para md-warn (rojo) */
+}
+
+
+
+ /* Personalización para los botones md-primary y md-warn */
+.md-button.md-primary {
+  background-color: #3db041; /* Personalizar el color de fondo */
+  color: white; /* Color del texto */
+  font-weight: bold;
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+.md-button.md-primary:hover {
+  background-color: #0f8513; /* Color de fondo al pasar el cursor */
+}
+
+.md-button.md-warn {
+  background-color: #e36258; /* Color de fondo para advertencias */
+  color: white; /* Color del texto */
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.md-button.md-warn:hover {
+  background-color: #cf0e0b; /* Color de fondo al pasar el cursor */
+}
+
+.bm-wizard-dialog {
+  max-width: 900px;
+  width: 90%;
+}
+
+.md-toolbar-tools h2 {
+  font-family: 'Poppins', sans-serif;  /* Usa la fuente especial que usaste antes */
+  font-weight: 600;  /* Ajusta el peso de la fuente si lo necesitas */
+  font-size: 24px;   /* Ajusta el tamaño de la fuente según lo necesites */
+}
+

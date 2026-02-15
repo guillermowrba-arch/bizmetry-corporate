@@ -1,0 +1,298 @@
+<head>
+    <link rel="stylesheet" href="/home/main-menu/users/tabs/user-management/edit/user-edit-dialog.css">
+</head>
+
+<!-- 👈 SIN ng-controller acá -->
+<md-dialog aria-label="Edit User" class="user-edit-dialog">
+
+    <!-- HEADER -->
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>
+                <md-icon>edit</md-icon>
+                <span>Edit User</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close dialog">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <!-- CONTENT -->
+    <md-dialog-content>
+        <div class="md-dialog-content">
+
+            <!-- User Info (Read-only) -->
+            <md-card class="user-info-card">
+                <md-card-content>
+                    <div layout="row" layout-align="start center">
+                        <md-icon style="color: #667eea; margin-right: 12px;">person</md-icon>
+                        <div flex>
+                            <div class="user-email-display">{{editableUser.email}}</div>
+                            <div class="user-id-display">ID: {{getShortId(editableUser.id)}}</div>
+                        </div>
+                        <div ng-if="editableUser.isSuperUser" class="superuser-badge">
+                            <md-icon>verified_user</md-icon>
+                            <span>SuperUser</span>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+
+            <form name="editUserForm" ng-submit="saveUser()">
+
+                <!-- Personal Information Section -->
+                <md-card style="margin-bottom: 24px;">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">
+                                <md-icon>badge</md-icon>
+                                Personal Information
+                            </span>
+                        </md-card-header-text>
+                    </md-card-header>
+
+                    <md-card-content>
+                        <div layout="row" layout-wrap>
+                            <!-- First Name -->
+                            <div flex="100" flex-gt-sm="50" style="padding: 0 8px;">
+                                <md-input-container class="md-block">
+                                    <label>First Name *</label>
+                                    <input type="text" ng-model="editableUser.firstName" name="firstName"
+                                        placeholder="Enter first name" required maxlength="100"
+                                        ng-pattern="/^[a-zA-ZÀ-ÿ\s'-]+$/" ng-change="checkForChanges()">
+                                    <div ng-messages="editUserForm.firstName.$error"
+                                        ng-if="editUserForm.firstName.$touched && editUserForm.firstName.$invalid">
+                                        <div ng-message="required" style="color: #f44336; font-size: 14px;">
+                                            First name is required
+                                        </div>
+                                        <div ng-message="pattern" style="color: #f44336; font-size: 14px;">
+                                            Only letters, spaces, hyphens and apostrophes allowed
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+
+                            <!-- Last Name -->
+                            <div flex="100" flex-gt-sm="50" style="padding: 0 8px;">
+                                <md-input-container class="md-block">
+                                    <label>Last Name *</label>
+                                    <input type="text" ng-model="editableUser.lastName" name="lastName"
+                                        placeholder="Enter last name" required maxlength="100"
+                                        ng-pattern="/^[a-zA-ZÀ-ÿ\s'-]+$/" ng-change="checkForChanges()">
+                                    <div ng-messages="editUserForm.lastName.$error"
+                                        ng-if="editUserForm.lastName.$touched && editUserForm.lastName.$invalid">
+                                        <div ng-message="required" style="color: #f44336; font-size: 14px;">
+                                            Last name is required
+                                        </div>
+                                        <div ng-message="pattern" style="color: #f44336; font-size: 14px;">
+                                            Only letters, spaces, hyphens and apostrophes allowed
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+
+                <!-- Roles Section -->
+                <md-card style="margin-bottom: 24px;"
+                    ng-class="{'super-user-roles-disabled': editableUser.isSuperUser}">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">
+                                <md-icon>security</md-icon>
+                                Roles & Permissions
+                                <span ng-if="editableUser.isSuperUser" class="superuser-lock-indicator">
+                                    <md-icon>lock</md-icon>
+                                    <span>Protected</span>
+                                </span>
+                            </span>
+                        </md-card-header-text>
+                    </md-card-header>
+
+                    <md-card-content>
+                        <div ng-if="availableRoles.length === 0" class="no-roles-message">
+                            <md-icon>info</md-icon>
+                            <span>No roles available for this account</span>
+                        </div>
+
+                        <div ng-if="availableRoles.length > 0">
+                            <div ng-repeat="role in availableRoles">
+                                <md-checkbox ng-model="roleSelection[role.id]" ng-disabled="editableUser.isSuperUser"
+                                    ng-change="checkForChanges()" aria-label="{{role.name}}" class="md-primary">
+                                    <div style="width: 100%;">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                            <span>{{role.name}}</span>
+                                            <md-button ng-if="role.authorizations && role.authorizations.length > 0"
+                                                class="md-icon-button role-permissions-btn"
+                                                ng-click="showPermissions($event, role); $event.stopPropagation();"
+                                                ng-disabled="editableUser.isSuperUser"
+                                                aria-label="View permissions for {{role.name}}">
+                                                <md-icon>visibility</md-icon>
+                                                <md-tooltip md-direction="top">View Permissions
+                                                    ({{role.authorizations.length}})</md-tooltip>
+                                            </md-button>
+                                        </div>
+                                        <span ng-if="role.description">{{role.description}}</span>
+                                        <span class="superuser-role-badge" ng-if="role.isSuperUserRole">
+                                            <md-icon>verified_user</md-icon>
+                                            SuperUser Role
+                                        </span>
+                                    </div>
+                                </md-checkbox>
+                            </div>
+
+                            <!-- Selected roles count -->
+                            <div ng-if="getSelectedRolesCount() > 0" class="selected-roles-counter">
+                                <md-icon>check_circle</md-icon>
+                                <span>{{getSelectedRolesCount()}} role(s) selected</span>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+
+                <!-- Security Section -->
+                <md-card style="margin-bottom: 12px;">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <span class="md-title">
+                                <md-icon>vpn_key</md-icon>
+                                Security Settings
+                            </span>
+                        </md-card-header-text>
+                    </md-card-header>
+
+                    <md-card-content>
+                        <div layout="row" layout-wrap>
+                            <!-- Password -->
+                            <div flex="100" flex-gt-sm="50" style="padding: 0 8px;">
+                                <md-input-container class="md-block">
+                                    <label>Password *</label>
+                                    <div style="position: relative;">
+                                        <input ng-attr-type="{{showPassword ? 'text' : 'password'}}" name="password"
+                                            ng-model="passwords.newPassword" ng-change="onPasswordChange()"
+                                            ng-pattern="passwordPattern" required minlength="8"
+                                            placeholder="Enter password" style="padding-right: 40px;">
+                                        <md-button class="md-icon-button reveal-password-btn"
+                                            ng-mousedown="showPassword = true" ng-mouseup="showPassword = false"
+                                            ng-mouseleave="showPassword = false" aria-label="Reveal password"
+                                            tabindex="-1" type="button">
+                                            <md-icon ng-if="!showPassword">visibility</md-icon>
+                                            <md-icon ng-if="showPassword">visibility_off</md-icon>
+                                            <md-tooltip md-direction="top">Hold to reveal password</md-tooltip>
+                                        </md-button>
+                                    </div>
+                                    <!-- Validation messages - prioritized, only ONE shows -->
+                                    <div ng-if="editUserForm.password.$touched && editUserForm.password.$invalid"
+                                        style="margin-top: 4px;">
+                                        <div ng-if="editUserForm.password.$error.required"
+                                            style="color: #f44336; font-size: 14px;">
+                                            <md-icon
+                                                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                                            Password is required
+                                        </div>
+                                        <div ng-if="!editUserForm.password.$error.required && editUserForm.password.$error.minlength"
+                                            style="color: #f44336; font-size: 14px;">
+                                            <md-icon
+                                                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                                            Password must be at least 8 characters
+                                        </div>
+                                        <div ng-if="!editUserForm.password.$error.required && !editUserForm.password.$error.minlength && editUserForm.password.$error.pattern"
+                                            style="color: #f44336; font-size: 14px;">
+                                            <md-icon
+                                                style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                                            Must have: 1 uppercase, 1 number, 1 special (#@_!)
+                                        </div>
+                                    </div>
+                                    <!-- Password strength indicator -->
+                                    <div ng-if="passwords.newPassword && passwords.newPassword.length > 0 && !isPlaceholderPassword()"
+                                        style="margin-top: 8px;">
+                                        <div style="font-size: 13px; color: #666; margin-bottom: 4px;">Password
+                                            strength:</div>
+                                        <md-progress-linear md-mode="determinate" value="{{getPasswordStrength()}}"
+                                            ng-class="{
+                                                            'md-warn': getPasswordStrength() < 50,
+                                                            'md-accent': getPasswordStrength() >= 50 && getPasswordStrength() < 80,
+                                                            'md-primary': getPasswordStrength() >= 80
+                                                          }">
+                                        </md-progress-linear>
+                                    </div>
+                                    <!-- Password requirements helper - very small text -->
+                                    <div style="font-size: 10px; color: #999; margin-top: 4px; line-height: 1.3;">
+                                        Min 8 chars • 1 uppercase • 1 number • 1 special (#@_!)
+                                    </div>
+                                    <!-- Auto-Generate Button -->
+                                    <div style="margin-top: 8px;">
+                                        <md-button class="md-raised auto-generate-password-btn"
+                                            ng-click="autoGeneratePassword()">
+                                            <md-icon>vpn_key</md-icon>
+                                            Auto-Generate
+                                        </md-button>
+                                    </div>
+                                </md-input-container>
+                            </div>
+
+                            <!-- Password Confirmation -->
+                            <div flex="100" flex-gt-sm="50" style="padding: 0 8px;">
+                                <md-input-container class="md-block">
+                                    <label>Confirm Password *</label>
+                                    <div style="position: relative;">
+                                        <input ng-attr-type="{{showPasswordConfirm ? 'text' : 'password'}}"
+                                            name="passwordConfirm" ng-model="passwords.confirmPassword"
+                                            ng-change="validatePasswordMatch()" required placeholder="Confirm password"
+                                            style="padding-right: 40px;">
+                                        <md-button class="md-icon-button reveal-password-btn"
+                                            ng-mousedown="showPasswordConfirm = true"
+                                            ng-mouseup="showPasswordConfirm = false"
+                                            ng-mouseleave="showPasswordConfirm = false"
+                                            aria-label="Reveal password confirmation" tabindex="-1" type="button">
+                                            <md-icon ng-if="!showPasswordConfirm">visibility</md-icon>
+                                            <md-icon ng-if="showPasswordConfirm">visibility_off</md-icon>
+                                            <md-tooltip md-direction="top">Hold to reveal password</md-tooltip>
+                                        </md-button>
+                                    </div>
+                                    <div ng-messages="editUserForm.passwordConfirm.$error"
+                                        ng-if="editUserForm.passwordConfirm.$touched && editUserForm.passwordConfirm.$invalid">
+                                        <div ng-message="required" style="color: #f44336; font-size: 14px;">
+                                            Password confirmation is required
+                                        </div>
+                                    </div>
+                                    <!-- Password match validation -->
+                                    <div ng-if="passwordValidation.checked && !passwordValidation.match && !isPlaceholderPassword()"
+                                        style="color: #f44336; font-size: 14px; margin-top: 4px;">
+                                        <md-icon
+                                            style="font-size: 16px; height: 16px; width: 16px; margin-right: 4px;">error</md-icon>
+                                        Passwords do not match
+                                    </div>
+                                    <div ng-if="passwordValidation.checked && passwordValidation.match && passwords.newPassword && passwords.newPassword.length >= 8 && !isPlaceholderPassword()"
+                                        style="color: #4caf50; font-size: 14px; margin-top: 4px;">
+                                        <md-icon
+                                            style="font-size: 16px; height: 16px; width: 16px; margin-right: 4px;">check_circle</md-icon>
+                                        Passwords match
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+
+            </form>
+        </div>
+    </md-dialog-content>
+
+    <!-- FOOTER -->
+    <md-dialog-actions layout="row" layout-align="end center">
+        <md-button ng-click="cancel()" class="md-raised">
+            <md-icon>close</md-icon>
+            Cancel
+        </md-button>
+        <md-button ng-click="saveUser()" ng-disabled="!isFormValid()" class="md-raised md-primary">
+            <md-icon>save</md-icon>
+            Save Changes
+        </md-button>
+    </md-dialog-actions>
+
+</md-dialog>

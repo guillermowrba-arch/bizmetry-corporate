@@ -1,0 +1,940 @@
+/* =====================================================
+   WIZARD DIALOG - ESTRUCTURA ESTRICTA
+   ===================================================== */
+
+.wizard-dialog {
+  max-width: 1100px !important;
+  width: 95% !important;
+  height: 92vh !important;
+  max-height: 920px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* =====================================================
+   TOOLBAR
+   ===================================================== */
+
+.wizard-toolbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 56px !important;
+  max-height: 56px !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  flex-basis: 56px !important; /* ✅ NUEVO: base fija */
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+.wizard-toolbar .md-toolbar-tools {
+  padding: 0 24px;
+  min-height: 56px !important;
+  max-height: 56px !important;
+}
+
+.wizard-icon {
+  color: white !important;
+  font-size: 24px !important;
+  margin-right: 12px;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.wizard-toolbar h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.wizard-progress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: white;
+  margin-right: 16px;
+}
+
+.step-indicator {
+  font-weight: 600;
+}
+
+.step-divider {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.step-total {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* =====================================================
+   STEPPER - COMPLETAMENTE SEPARADO
+   ===================================================== */
+
+.wizard-stepper {
+  background: white;
+  padding: 20px 24px; /* ✅ CAMBIO: más padding vertical */
+  border-bottom: 2px solid #e0e0e0;
+  min-height: 80px !important; /* ✅ CAMBIO: más alto */
+  max-height: 80px !important; /* ✅ CAMBIO: más alto */
+  height: 80px !important; /* ✅ NUEVO: altura explícita */
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  flex-basis: 80px !important; /* ✅ NUEVO: base fija */
+  z-index: 9 !important; /* ✅ CAMBIO: justo debajo del toolbar */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* ✅ CAMBIO: sombra más visible */
+  position: relative !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  display: flex !important; /* ✅ NUEVO */
+  align-items: center !important; /* ✅ NUEVO */
+}
+
+/* =====================================================
+   CONTENT - SCROLL INDEPENDIENTE
+   ===================================================== */
+
+.wizard-content {
+  background: #fafafa;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  flex: 1 !important;
+  flex-shrink: 1 !important;
+  flex-grow: 1 !important;
+  position: relative !important;
+  min-height: 0 !important; /* ✅ CRÍTICO */
+  z-index: 1 !important;
+  /* ✅ NUEVO: asegurar que el contenido empiece después del stepper */
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* =====================================================
+   STEPS - PADDING SUPERIOR GENEROSO
+   ===================================================== */
+
+.wizard-step {
+  padding: 48px 32px 40px 32px; /* ✅ CAMBIO: 48px arriba para separación MUY clara */
+  animation: fadeIn 0.3s ease-in;
+  min-height: 500px;
+  position: relative; /* ✅ NUEVO */
+  z-index: 1; /* ✅ NUEVO */
+}
+
+/* =====================================================
+   STEP HEADER
+   ===================================================== */
+
+.step-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 28px;
+  position: relative;
+  z-index: 1; /* ✅ Asegurar que esté por debajo del stepper */
+}
+
+.step-header-content {
+  flex: 1;
+  max-width: 640px;
+}
+
+.step-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.step-description {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.step-illustration {
+  width: 220px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.step-illustration img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* =====================================================
+   DETAIL SECTION - PADDING SUPERIOR
+   ===================================================== */
+
+.detail-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* =====================================================
+   OPTIONS GRID
+   ===================================================== */
+
+.options-grid {
+  display: grid;
+  gap: 16px;
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.option-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.option-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.option-card.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.option-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.option-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.option-icon md-icon {
+  font-size: 28px !important;
+  color: #667eea;
+}
+
+.option-details {
+  flex: 1;
+}
+
+.option-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.option-help {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.option-checkmark {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.option-card.selected .option-checkmark {
+  opacity: 1;
+}
+
+.option-checkmark md-icon {
+  font-size: 32px !important;
+  color: #667eea;
+}
+
+/* =====================================================
+   FORM STYLES
+   ===================================================== */
+
+.wizard-form {
+  max-width: 800px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.required {
+  color: #f44336;
+  margin-left: 4px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  background: white;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #9e9e9e;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+.form-select {
+  width: 100%;
+  background: white !important;
+  border: 2px solid #e0e0e0 !important;
+  border-radius: 6px !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+}
+
+.form-select:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.form-select .md-select-value {
+  color: #333 !important;
+  border: none !important;
+}
+
+.form-select .md-select-placeholder {
+  color: #9e9e9e !important;
+}
+
+/* =====================================================
+   LISTS (PROFILES/TEMPLATES)
+   ===================================================== */
+
+.profile-list,
+.template-list {
+  display: grid;
+  gap: 16px;
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-item,
+.template-item {
+  display: flex;
+  align-items: flex-start;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.profile-item:hover,
+.template-item:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.profile-item.selected,
+.template-item.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.template-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.profile-radio,
+.template-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.profile-content,
+.template-content {
+  flex: 1;
+}
+
+.profile-header,
+.template-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.profile-name,
+.template-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-id,
+.template-id {
+  background: #f0f4c3;
+  color: #827717;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.profile-meta,
+.template-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.profile-project {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #666;
+}
+
+.profile-project md-icon {
+  font-size: 16px !important;
+  color: #9e9e9e;
+}
+
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.meta-pill md-icon {
+  font-size: 14px !important;
+}
+
+.pill-domain {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.pill-stack {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.pill-language {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.profile-description,
+.template-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.template-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  color: #999;
+}
+
+.template-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.template-date md-icon {
+  font-size: 16px !important;
+}
+
+.profile-checkmark,
+.template-checkmark {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.profile-item.selected .profile-checkmark,
+.template-item.selected .template-checkmark {
+  opacity: 1;
+}
+
+.profile-checkmark md-icon,
+.template-checkmark md-icon {
+  font-size: 28px !important;
+  color: #667eea;
+}
+
+/* =====================================================
+   SUMMARY CARD
+   ===================================================== */
+
+.summary-card {
+  background: white;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.summary-section {
+  margin-bottom: 32px;
+}
+
+.summary-section:last-child {
+  margin-bottom: 0;
+}
+
+.summary-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.summary-item {
+  margin-bottom: 16px;
+}
+
+.summary-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.summary-badge md-icon {
+  font-size: 20px !important;
+}
+
+.badge-empty {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.badge-clone {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.badge-master {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.badge-id {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.summary-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.field-value {
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.pill-value {
+  display: inline-block;
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.description-value {
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   FOOTER ACTIONS
+   ===================================================== */
+
+.wizard-actions {
+  background: white;
+  border-top: 2px solid #e0e0e0;
+  padding: 16px 24px !important;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  min-height: 72px !important;
+  max-height: 72px !important;
+  height: 72px !important; /* ✅ NUEVO */
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  flex-basis: 72px !important; /* ✅ NUEVO */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  z-index: 9 !important;
+  position: relative !important;
+}
+
+.wizard-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px;
+  padding: 0 20px !important;
+  height: 40px !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+  min-width: 100px !important;
+}
+
+.wizard-btn md-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 !important;
+}
+
+.btn-back {
+  background: #f5f5f5 !important;
+  color: #666 !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.btn-back:hover:not([disabled]) {
+  background: #e0e0e0 !important;
+  border-color: #bdbdbd !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.btn-primary:hover:not([disabled]) {
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-success {
+  background: #4caf50 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.btn-success:hover:not([disabled]) {
+  background: #45a049 !important;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-cancel {
+  background: white !important;
+  color: #666 !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.btn-cancel:hover:not([disabled]) {
+  background: #f5f5f5 !important;
+  border-color: #bdbdbd !important;
+}
+
+.wizard-btn[disabled] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  pointer-events: none !important;
+}
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+
+.wizard-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wizard-content::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+.wizard-content::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 4px;
+}
+
+.wizard-content::-webkit-scrollbar-thumb:hover {
+  background: #9e9e9e;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 768px) {
+  .wizard-dialog {
+    width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+  }
+
+  .step-header {
+    flex-direction: column;
+  }
+
+  .step-illustration {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .wizard-form {
+    max-width: 100%;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wizard-btn {
+    padding: 0 16px !important;
+    font-size: 13px !important;
+    min-width: 80px !important;
+  }
+
+  .wizard-btn md-icon {
+    font-size: 18px !important;
+  }
+
+  .wizard-progress {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
+
+/* =====================================================
+   TOOLTIPS
+   ===================================================== */
+
+md-tooltip {
+  font-size: 13px !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+}
+
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+.wizard-btn:focus-visible,
+.option-card:focus-within,
+.profile-item:focus-within,
+.template-item:focus-within,
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* =====================================================
+   STEPPER - CENTRADO + NO PISA CONTENIDO
+   ===================================================== */
+
+.wizard-stepper {
+  /* altura un poco más generosa para que quede “en el área blanca” */
+  height: 96px !important;
+  min-height: 96px !important;
+  max-height: 96px !important;
+  flex-basis: 96px !important;
+
+  display: flex !important;
+  align-items: center !important;      /* centrado vertical */
+  justify-content: center !important;  /* centrado horizontal */
+
+  background: #fff !important;
+  padding: 0 24px !important;          /* sin padding vertical extra */
+  border-bottom: 2px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  position: relative !important;
+  z-index: 9 !important;
+}
+
+/* Asegurar que el stepper NO sea full-bleed raro y quede centrado */
+.wizard-stepper bm-stepper,
+.wizard-stepper .bm-stepper,
+.wizard-stepper > * {
+  width: 100% !important;
+  max-width: 920px !important; /* ajustá al gusto */
+  margin: 0 auto !important;
+}
+
+/* =====================================================
+   CONTENT - RESERVAR ESPACIO (ANTI-SOLAPE)
+   ===================================================== */
+
+/* Si por alguna razón el stepper queda “overlay”, esto evita que pise */
+md-dialog-content.wizard-content {
+  position: relative !important;
+  z-index: 1 !important;
+
+  /* 🔥 clave: empuja el contenido por si el stepper no está reservando altura */
+  padding-top: 16px !important;
+}
+
+/* Y en el step 1, un pequeño offset extra para que el título respire */
+.wizard-step.step-source {
+  padding-top: 56px !important; /* antes 48px; subilo si querés más aire */
+}
+
+
+/* ============================================
+   ESPACIO ENTRE STEPPER Y CONTENIDO DE CADA STEP
+   ============================================ */
+
+/* primer bloque de cada step */
+.wizard-step > :first-child,
+.wizard-step-content > :first-child,
+.step-content > :first-child {
+  margin-top: 32px;
+}
+
+/* por si los títulos vienen directos */
+.wizard-step h1,
+.wizard-step h2,
+.wizard-step h3 {
+  margin-top: 32px;
+}
+
+/* Un poco más de aire arriba en Step 2 y Step 3 */
+.step-basic-info,
+.step-details {
+  padding-top: 64px !important;  /* antes hereda 48px */
+}

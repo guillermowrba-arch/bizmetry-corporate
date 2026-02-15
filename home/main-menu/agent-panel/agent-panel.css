@@ -1,0 +1,535 @@
+/* =====================================================
+   AGENTS PANEL - PROFESSIONAL STYLING - OPTIMIZED
+   ===================================================== */
+
+/* Dialog structure */
+.agents-panel-dialog {
+  width: 1400px;
+  max-width: 98vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =====================================================
+   CONTROLES FIJOS - STICKY HEADER
+   ===================================================== */
+
+.agents-controls-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: #fafafa;
+  padding: 24px 24px 0 24px;
+}
+
+.agents-controls-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+/* Alineación vertical de todos los controles */
+.agents-controls-card md-input-container {
+  margin: 0 !important;
+  padding: 0 !important;
+  vertical-align: baseline !important;
+}
+
+.agents-controls-card md-input-container .md-input-container-inner {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.agents-controls-card md-input-container label {
+  font-size: 12px;
+  color: #757575;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 4px !important;
+  position: relative;
+  top: 0 !important;
+}
+
+.agents-controls-card md-input-container input,
+.agents-controls-card md-input-container md-select {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.agents-controls-card md-select {
+  min-width: 100px;
+}
+
+.agents-controls-card md-select-value {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+.agents-controls-card .md-button.md-raised {
+  margin: 0 !important;
+  height: 40px !important;
+  line-height: 40px !important;
+}
+
+/* Slider styling */
+.agents-controls-card md-slider {
+  height: 28px;
+  margin: 0;
+}
+
+.agents-controls-card md-slider .md-track {
+  background-color: #e0e0e0;
+  height: 4px;
+}
+
+.agents-controls-card md-slider .md-track-fill {
+  background-color: #1976d2;
+  height: 4px;
+}
+
+.agents-controls-card md-slider .md-thumb {
+  background-color: #1976d2;
+  width: 16px;
+  height: 16px;
+}
+
+/* =====================================================
+   ÁREA SCROLLEABLE
+   ===================================================== */
+
+/* =====================================================
+   ÁREA SCROLLEABLE - FIX SCROLL
+   ===================================================== */
+
+.agents-scrollable-content {
+  flex: 1;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  padding: 0 0 24px 0;
+  max-height: calc(90vh - 280px); /* ✅ Altura máxima definida */
+}
+
+/* Scrollbar styling */
+.agents-scrollable-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.agents-scrollable-content::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.agents-scrollable-content::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 4px;
+}
+
+.agents-scrollable-content::-webkit-scrollbar-thumb:hover {
+  background: #9e9e9e;
+}
+
+/* =====================================================
+   AGENTS TABLE
+   ===================================================== */
+
+.agents-table {
+  width: 100%;
+  min-width: 1440px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.agents-table thead {
+  position: sticky;
+  top: 0;
+  background-color: #f5f5f5;
+  z-index: 10;
+}
+
+.agents-table th {
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  color: #616161;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+.agents-table td {
+  padding: 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.agents-table td > div[layout="row"] {
+  min-width: 400px !important;
+  overflow: visible !important;
+}
+
+/* Agent row hover effects */
+.agent-row {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.agent-row:hover {
+  background-color: #f8f4ff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.agent-row:hover td {
+  border-bottom-color: #d1c4e9;
+}
+
+.agent-row:last-child td {
+  border-bottom: none;
+}
+
+/* =====================================================
+   METRIC BARS
+   ===================================================== */
+
+.metric-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.metric-bar {
+  height: 8px;
+  border-radius: 4px;
+  transition: width 0.3s ease, background 0.3s ease;
+  min-width: 2px;
+}
+
+.metric-value {
+  font-size: 11px;
+  color: #757575;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+/* =====================================================
+   ACTION BUTTONS
+   ===================================================== */
+
+.agents-table .md-icon-button,
+.action-btn {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.agents-table .md-icon-button md-icon,
+.action-btn md-icon {
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Colores específicos por tipo de acción */
+.action-btn:nth-child(1) md-icon { color: #f57c00 !important; }
+.action-btn:nth-child(2) md-icon { color: #1976d2 !important; }
+.action-btn:nth-child(3) md-icon { color: #d32f2f !important; }
+.action-btn:nth-child(4) md-icon { color: #388e3c !important; }
+.action-btn:nth-child(5) md-icon { color: #6a1b9a !important; }
+
+/* Hover effects para botones activos */
+.agents-table .md-icon-button:not([disabled]):hover md-icon,
+.action-btn:not([disabled]):hover md-icon {
+  transform: scale(1.2) !important;
+  filter: brightness(1.3) !important;
+}
+
+/* =====================================================
+   DISABLED STATE
+   ===================================================== */
+
+.agents-table .md-icon-button[disabled],
+.action-btn[disabled] {
+  opacity: 1 !important;
+  cursor: not-allowed !important;
+  background-color: transparent !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.agents-table .md-icon-button[disabled]::before,
+.agents-table .md-icon-button[disabled]::after,
+.action-btn[disabled]::before,
+.action-btn[disabled]::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  background: none !important;
+}
+
+.agents-table .md-icon-button[disabled] .md-ripple-container,
+.action-btn[disabled] .md-ripple-container,
+.agents-table .md-icon-button[disabled] ._md-container,
+.action-btn[disabled] ._md-container {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.agents-table .md-icon-button[disabled] md-icon,
+.action-btn[disabled] md-icon {
+  color: #bdbdbd !important;
+  opacity: 0.5 !important;
+  background: transparent !important;
+}
+
+.agents-table .md-icon-button[disabled]:hover,
+.action-btn[disabled]:hover {
+  background-color: transparent !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.agents-table .md-icon-button[disabled]:hover md-icon,
+.action-btn[disabled]:hover md-icon {
+  transform: none !important;
+  filter: none !important;
+}
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-icon {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(25, 118, 210, 0.15);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1400px) {
+  .agents-panel-dialog {
+    width: 98vw;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .agents-panel-dialog {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+  }
+
+  .agents-table th,
+  .agents-table td {
+    padding: 12px;
+    font-size: 12px;
+  }
+  
+  .action-btn {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .action-btn md-icon {
+    font-size: 18px !important;
+  }
+}
+
+/* =====================================================
+   TOOLBAR - CONSISTENT WITH OTHER DIALOGS
+   ===================================================== */
+
+.agents-panel-toolbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-height: 72px !important;
+  flex-shrink: 0 !important;
+}
+
+.agents-panel-toolbar .md-toolbar-tools {
+  padding: 0 24px;
+  min-height: 72px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px;
+}
+
+.agents-panel-icon {
+  color: white !important;
+  font-size: 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+.agents-panel-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.agents-panel-header-info h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agents-panel-subtitle {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+}
+
+.agents-panel-toolbar .md-toolbar-tools > span[flex] {
+  flex: 1 !important;
+  min-width: 20px;
+}
+
+.agents-panel-stats-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.agents-panel-stats-badge md-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0;
+  color: white !important;
+}
+
+.agents-panel-stats-badge.badge-online {
+  background: rgba(76, 175, 80, 0.2);
+  color: #c8e6c9;
+  border: 1px solid rgba(200, 230, 201, 0.3);
+}
+
+.agents-panel-stats-badge.badge-offline {
+  background: rgba(244, 67, 54, 0.2);
+  color: #ffcdd2;
+  border: 1px solid rgba(255, 205, 210, 0.3);
+}
+
+.agents-panel-toolbar .md-icon-button {
+  margin-left: 16px !important;
+  margin-right: 0 !important;
+  flex-shrink: 0;
+}
+
+.agents-panel-toolbar .md-icon-button md-icon {
+  color: white !important;
+}
+
+/* =====================================================
+   FIX PARA MD-SELECT - TEXTO VISIBLE DESPUÉS DE SELECCIÓN
+   ===================================================== */
+
+/* Asegurar que el texto seleccionado sea visible */
+.agents-controls-card md-select .md-select-value {
+  color: #424242 !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+.agents-controls-card md-select .md-select-value span {
+  color: #424242 !important;
+}
+
+.agents-controls-card md-select .md-select-value .md-select-icon {
+  color: #757575 !important;
+}
+
+/* Fix para cuando está focused */
+.agents-controls-card md-select:focus .md-select-value,
+.agents-controls-card md-select.md-focused .md-select-value {
+  color: #424242 !important;
+}
+
+.agents-controls-card md-select:focus .md-select-value span,
+.agents-controls-card md-select.md-focused .md-select-value span {
+  color: #424242 !important;
+}
+
+/* Fix para el placeholder cuando no hay selección */
+.agents-controls-card md-select .md-select-value .md-select-placeholder {
+  color: #9e9e9e !important;
+}
+
+/* Fix para evitar que el texto se vuelva transparente */
+.agents-controls-card md-select .md-select-value:not(.md-select-placeholder) {
+  opacity: 1 !important;
+  color: #424242 !important;
+}
+
+/* Asegurar que el contenido del select sea visible */
+.agents-controls-card md-input-container:not(.md-input-focused) md-select .md-select-value {
+  color: #424242 !important;
+  border-bottom-color: #e0e0e0 !important;
+}
+
+/* Fix para el texto cuando pierde foco */
+.agents-controls-card md-input-container md-select .md-select-value > span:first-child {
+  color: #424242 !important;
+  font-weight: 500 !important;
+}
+
+/* Asegurar visibilidad en todos los estados */
+.agents-controls-card md-select-value .md-text {
+  color: #424242 !important;
+}
+
+.agents-controls-card md-select[disabled] .md-select-value {
+  color: #bdbdbd !important;
+}

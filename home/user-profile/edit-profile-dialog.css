@@ -1,0 +1,723 @@
+/* =====================================================
+   EDIT PROFILE DIALOG
+   ===================================================== */
+
+.edit-profile-dialog {
+  max-width: 750px;
+  width: 90vw;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Toolbar */
+.edit-profile-dialog .dialog-toolbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 56px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile-dialog .md-toolbar-tools {
+  padding: 0 12px;
+  min-height: 56px;
+}
+
+.edit-profile-dialog .toolbar-icon {
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  color: white !important;
+  margin-right: 10px;
+}
+
+.edit-profile-dialog .dialog-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+/* Content */
+.edit-profile-dialog .dialog-content {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #f5f5f5;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.edit-profile-dialog .dialog-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.edit-profile-dialog .dialog-content::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+.edit-profile-dialog .dialog-content::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 3px;
+}
+
+.edit-profile-dialog .dialog-content::-webkit-scrollbar-thumb:hover {
+  background: #9e9e9e;
+}
+
+.form-container {
+  min-height: 650px;
+  padding: 20px;
+}
+
+/* User Info Section */
+.user-info-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.user-icon {
+  font-size: 44px !important;
+  width: 44px !important;
+  height: 44px !important;
+  color: #667eea !important;
+  flex-shrink: 0;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-email {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 5px 0;
+}
+
+.info-text {
+  font-size: 12px;
+  color: #757575;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Section Cards */
+.section-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Section Header */
+.section-header {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.section-icon {
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  color: #667eea !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.optional-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9e9e9e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  justify-self: end;
+}
+
+.section-description {
+  font-size: 12px;
+  color: #757575;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Profile Fields */
+.profile-field {
+  margin: 18px 0 !important;
+}
+
+.profile-field label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #616161 !important;
+}
+
+.profile-field .field-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: #667eea !important;
+}
+
+.profile-field input {
+  font-size: 14px;
+  padding: 10px 0;
+  border-bottom: 2px solid #e0e0e0 !important;
+}
+
+.profile-field input:focus {
+  border-bottom-color: #667eea !important;
+}
+
+.profile-field.md-input-invalid input {
+  border-bottom-color: #f44336 !important;
+}
+
+/* Password Fields */
+.password-field {
+  margin: 18px 0 !important;
+}
+
+.password-field label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #616161 !important;
+}
+
+.password-field .field-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: #667eea !important;
+}
+
+.password-field input {
+  font-size: 14px;
+  padding: 10px 0;
+  border-bottom: 2px solid #e0e0e0 !important;
+}
+
+.password-field input:focus {
+  border-bottom-color: #667eea !important;
+}
+
+.password-field.md-input-invalid input {
+  border-bottom-color: #f44336 !important;
+}
+
+.error-message {
+  font-size: 11px;
+  color: #f44336;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Password Requirements */
+.password-requirements {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 18px 0 0 0;
+  border: 1px solid #e0e0e0;
+}
+
+.requirements-header {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.requirements-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: #667eea !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.requirements-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.requirements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requirements-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 12px;
+  color: #757575;
+  transition: all 0.3s ease;
+}
+
+.requirements-list li.met {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.requirement-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: #bdbdbd !important;
+  transition: all 0.3s ease;
+}
+
+.requirements-list li.met .requirement-icon {
+  color: #4caf50 !important;
+}
+
+/* Alert Messages */
+.error-alert,
+.success-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 8px;
+  margin: 20px 0 0 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.error-alert {
+  background-color: #ffebee;
+  color: #c62828;
+  border-left: 4px solid #f44336;
+}
+
+.success-alert {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-left: 4px solid #4caf50;
+}
+
+.alert-icon {
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0;
+}
+
+.error-alert .alert-icon {
+  color: #f44336 !important;
+}
+
+.success-alert .alert-icon {
+  color: #4caf50 !important;
+}
+
+.alert-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+/* Dialog Actions */
+.edit-profile-dialog .dialog-actions {
+  background: white;
+  padding: 12px 16px !important;
+  border-top: 1px solid #e0e0e0;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-profile-dialog .dialog-actions .md-button {
+  margin: 0 !important;
+  min-width: 120px;
+  height: 38px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.edit-profile-dialog .dialog-actions .md-button:hover:not([disabled]) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.edit-profile-dialog .dialog-actions .md-button md-icon {
+  margin-right: 6px;
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.edit-profile-dialog .dialog-actions .md-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.edit-profile-dialog .dialog-actions .md-button[disabled] md-icon {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Cancel button */
+.edit-profile-dialog .dialog-actions .md-button:first-child {
+  background-color: #e0e0e0 !important;
+  color: #616161 !important;
+}
+
+.edit-profile-dialog .dialog-actions .md-button:first-child:hover:not([disabled]) {
+  background-color: #bdbdbd !important;
+}
+
+/* Primary button */
+.edit-profile-dialog .dialog-actions .md-button.md-primary {
+  background-color: #667eea !important;
+  color: white !important;
+}
+
+.edit-profile-dialog .dialog-actions .md-button.md-primary:hover:not([disabled]) {
+  background-color: #5568d3 !important;
+}
+
+/* =====================================================
+   PASSWORD STRENGTH INDICATOR
+   ===================================================== */
+
+.edit-profile-dialog md-progress-linear {
+  height: 6px;
+  border-radius: 3px;
+}
+
+.edit-profile-dialog md-progress-linear.md-warn .md-bar {
+  background-color: #f44336;
+}
+
+.edit-profile-dialog md-progress-linear.md-accent .md-bar {
+  background-color: #ff9800;
+}
+
+.edit-profile-dialog md-progress-linear.md-primary .md-bar {
+  background-color: #4caf50;
+}
+
+/* =====================================================
+   AUTO-GENERATE PASSWORD BUTTON
+   ===================================================== */
+
+.edit-profile-dialog .auto-generate-password-btn {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%) !important;
+  color: white !important;
+  margin: 0 !important;
+  min-width: 140px;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.edit-profile-dialog .auto-generate-password-btn:hover {
+  background: linear-gradient(135deg, #45a049 0%, #2e7d32 100%) !important;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.edit-profile-dialog .auto-generate-password-btn md-icon {
+  color: white !important;
+  margin-right: 4px;
+}
+
+/* =====================================================
+   REVEAL PASSWORD BUTTON
+   ===================================================== */
+
+.edit-profile-dialog .reveal-password-btn {
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+}
+
+.edit-profile-dialog .reveal-password-btn md-icon {
+  color: #667eea !important;
+  font-size: 20px;
+}
+
+.edit-profile-dialog .reveal-password-btn:hover md-icon {
+  color: #764ba2 !important;
+}
+
+.edit-profile-dialog md-input-container input[type='password'],
+.edit-profile-dialog md-input-container input[type='text'] {
+  padding-right: 40px !important;
+}
+
+/* =====================================================
+   SUMMARY CARD
+   ===================================================== */
+
+.edit-profile-dialog .summary-card-container {
+  min-height: 100px;
+  margin-top: 20px;
+  transition: none !important;
+}
+
+.edit-profile-dialog .summary-card {
+  margin: 0 !important;
+  animation: none !important;
+  transition: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* =====================================================
+   VALIDATION MESSAGES
+   ===================================================== */
+
+.edit-profile-dialog [ng-messages] [ng-message] {
+  color: #f44336;
+  font-size: 14px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.edit-profile-dialog [ng-messages] [ng-message] md-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+  margin-right: 4px;
+}
+
+/* =====================================================
+   LOADING STATE
+   ===================================================== */
+
+.edit-profile-dialog .md-button md-progress-circular {
+  margin-right: 8px;
+}
+
+.edit-profile-dialog .md-button md-progress-circular circle {
+  stroke: white !important;
+}
+
+/* =====================================================
+   SAVE BUTTON - NO ANIMATION
+   ===================================================== */
+
+.edit-profile-dialog .save-button-no-animation {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.edit-profile-dialog .save-button-no-animation:hover:not([disabled]) {
+  background-color: #5568d3 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.edit-profile-dialog .save-button-no-animation[disabled] {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.edit-profile-dialog .save-button-no-animation md-icon {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 768px) {
+  .edit-profile-dialog {
+    width: 95vw;
+    max-width: none;
+  }
+
+  .form-container {
+    padding: 16px;
+  }
+
+  .user-info-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .user-icon {
+    font-size: 38px !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .section-card {
+    padding: 16px;
+  }
+
+  .section-header {
+    grid-template-columns: 20px 1fr auto;
+    gap: 8px;
+  }
+
+  .section-icon {
+    font-size: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .requirements-list li {
+    font-size: 11px;
+  }
+
+  .dialog-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .dialog-actions .md-button {
+    min-width: 100px;
+  }
+
+  .edit-profile-dialog .auto-generate-password-btn {
+    min-width: 100px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-email {
+    font-size: 14px;
+  }
+
+  .info-text {
+    font-size: 11px;
+  }
+
+  .section-title {
+    font-size: 14px;
+  }
+
+  .profile-field label,
+  .password-field label {
+    font-size: 12px;
+  }
+
+  .profile-field input,
+  .password-field input {
+    font-size: 13px;
+  }
+
+  .requirements-title {
+    font-size: 12px;
+  }
+
+  .requirements-list li {
+    font-size: 11px;
+  }
+
+  .alert-text {
+    font-size: 12px;
+  }
+
+  .dialog-actions .md-button {
+    width: 100%;
+    min-width: auto !important;
+  }
+}
+
+/* User Info Section - Actualizado con avatar de iniciales */
+.user-info-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+
+
+/* Ocultar el icono original si existe */
+.user-icon {
+  display: none;
+}
+
+/* Responsive para avatar de edit dialog */
+@media (max-width: 768px) {
+  .user-avatar-initials-edit {
+    width: 48px;
+    height: 48px;
+  }
+
+  .initials-text-edit {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-avatar-initials-edit {
+    width: 44px;
+    height: 44px;
+  }
+
+  .initials-text-edit {
+    font-size: 18px;
+  }
+}

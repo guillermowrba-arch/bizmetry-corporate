@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <link rel="icon" type="image/png" href="assets/favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicons/favicon.svg" />
+  <link rel="shortcut icon" href="assets/favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="BizMetry" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- SEO Meta Tags -->
+  <title>Bizmetry - Business Metrics & Analytics Platform | Real-Time Monitoring</title>
+  <meta name="description"
+    content="Bizmetry is a comprehensive business metrics and analytics platform that helps organizations track, monitor, and optimize their performance in real-time. Manage profiles, resources, agents, and templates efficiently." />
+  <meta name="keywords"
+    content="business metrics, analytics platform, performance monitoring, KPI tracking, real-time analytics, business intelligence, telemetry, resource management, agent monitoring" />
+  <meta name="author" content="Bizmetry" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.bizmetry.io/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.bizmetry.io/" />
+  <meta property="og:title" content="Bizmetry - Business Metrics & Analytics Platform" />
+  <meta property="og:description"
+    content="Track, monitor, and optimize your business performance with Bizmetry's comprehensive analytics platform." />
+  <meta property="og:image" content="https://www.bizmetry.io/assets/og-image.jpg" />
+  <meta property="og:site_name" content="Bizmetry" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://www.bizmetry.io/" />
+  <meta name="twitter:title" content="Bizmetry - Business Metrics & Analytics Platform" />
+  <meta name="twitter:description"
+    content="Track, monitor, and optimize your business performance with Bizmetry's comprehensive analytics platform." />
+  <meta name="twitter:image" content="https://www.bizmetry.io/assets/twitter-card.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="common/components/UserAvatar/UserAvatar.css">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#667eea" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Bizmetry",
+    "description": "Business Metrics & Analytics Platform for real-time monitoring and performance optimization",
+    "url": "https://www.bizmetry.io",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "Bizmetry",
+      "url": "https://www.bizmetry.io"
+    }
+  }
+  </script>
+
+  <!-- Angular Material CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.2.2/angular-material.min.css">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="common/loadingSpinner/loadingSpinnerStyles.css" />
+  <link rel="stylesheet" href="common/dialog/dialog.css" />
+  <link rel="stylesheet" href="common/stepper/bmStepper.css" />
+  <link rel="stylesheet" href="jobs/job-definitions-dialog.css" />
+  <link rel="stylesheet" href="login/logout-dialog.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-tree/2.22.6/angular-ui-tree.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/6.4.3/rzslider.min.css">
+
+  <!-- 🎬 VIDEO.JS CSS -->
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+
+  <!-- Icon Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- AngularJS Core -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-animate/1.8.2/angular-animate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-aria/1.8.2/angular-aria.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.8.2/angular-messages.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.2.2/angular-material.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+  <script src="https://unpkg.com/ngclipboard@1.1.1/dist/ngclipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-tree/2.22.6/angular-ui-tree.min.js"></script>
+
+  <!-- 🔥 RZSLIDER DEBE CARGAR *DESPUÉS* DE ANGULARJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/6.4.3/rzslider.min.js"></script>
+
+  <!-- JSONPath ESM -->
+  <script type="module">
+    import { JSONPath } from 'https://cdn.jsdelivr.net/npm/jsonpath-plus@10.2.0/dist/index-browser-esm.js';
+    window.JSONPath = { JSONPath: JSONPath };
+    console.log('✅ JSONPath-Plus loaded via ESM module');
+  </script>
+
+  <!-- App Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/node-forge@0.10.0/dist/forge.min.js"></script>
+  <script src="app.js"></script>
+  <script src="common/dialog/standard-dialog.js"></script>
+  <script src="common/ConfigurationService.js"></script>
+  <script src="common/PlatformInfoService.js"></script>
+  <script src="common/stepper/bmStepper.js"></script>
+  <script src="common/loadingSpinner/bmLoadingIndicator.js"></script>
+  <script src="common/loadingSpinner/LoadingHTTPInterceptor.js"></script>
+  <script src="common/loadingSpinner/LoadingService.js"></script>
+  <script src="common/components/GenericTypePill.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- ✅ CRÍTICO: Adaptador de tiempo para Chart.js -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+  <!-- 🎬 VIDEO.JS SCRIPT - DEBE IR ANTES DE LandingController.js -->
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
+  <script src="login/AuthService.js"></script>
+  <script src="login/loginController.js"></script>
+  <script src="register/register.js"></script>
+  <script src="activation/AccountActivationController.js"></script>
+  <script src="activation/UserActivationController.js"></script>
+  <script src="home/HomeController.js"></script>
+  <script src="home/user-profile/UserProfileDialogController.js"></script>
+  <script src="home/user-profile/EditProfileDialogController.js"></script>
+  <script src="home/user-profile/edit-organization/EditOrganizationDialogController.js"></script>
+
+  <script src="datasources/DatasourceDialogController.js"></script>
+  <script src="datasources/ConnectionResultDialogController.js"></script>
+  <script src="datasources/DatasourceEditDialogController.js"></script>
+  <script src="datasources/DatasourceService.js"></script>
+
+  <script src="profile/tabs/template/TemplateTabController.js"></script>
+  <script src="profile/tabs/environments/EnvWorkflowViewer.js"></script>
+  <script src="profile/tabs/environments/EditEnvironmentDialogController.js"></script>
+  <script src="profile/tabs/agents/configuration/AgentConfigService.js"></script>
+  <script src="profile/tabs/agents/logs/AgentLogsService.js"></script>
+  <script src="home/main-menu/agent-panel/AgentsPanelController.js"></script>
+  <script src="home/main-menu/users/usersDialogController.js"></script>
+  <script src="home/main-menu/users/tabs/roles-and-permissions/roles-tab-controller.js"></script>
+  <script src="home/main-menu/users/tabs/service-accounts/sa-tab-controller.js"></script>
+  <script src="home/main-menu/users/tabs/user-management/user-list/users-tab-controller.js"></script>
+  <script src="home/main-menu/users/tabs/user-management/user-management-controller.js"></script>
+  <script src="home/main-menu/users/tabs/user-management/create/UserCreateDialogController.js"></script>
+  <script src="home/main-menu/users/tabs/user-management/edit/UserEditDialogController.js"></script>
+  <script src="home/main-menu/users/tabs/user-management/usersService.js"></script>
+  <script src="home/main-menu/users/tabs/roles-and-permissions/RolesService.js"></script>
+  <script src="home/main-menu/users/tabs/service-accounts/ServiceAccount.js"></script>
+
+  <script src="profile/tabs/agents/download/DownloadDialogController.js"></script>
+  <script src="profile/tabs/agents/logs/LogDetailDialogController.js"></script>
+  <script src="profile/tabs/agents/configuration/AgentConfigDialogController.js"></script>
+  <script src="profile/tabs/agents/logs/AgentLogsDialogController.js"></script>
+  <script src="common/components/AgentStatusPill.js"></script>
+  <!-- User Avatar Component -->
+  <script src="common/components/UserAvatar/UserAvatar.js"></script>
+
+  <script src="profile/tabs/agents/TelemetryAgentService.js"></script>
+  <script src="profile/tabs/agents/download/DownloadService.js"></script>
+  <script src="profile/tabs/agents/stats/AgentStatsDialogController.js"></script>
+
+  <script src="profile/ProfileService.js"></script>
+  <script src="profile/tabs/clients/ClientService.js"></script>
+  <script src="profile/tabs/clients/ClientCreateDialogController.js"></script>
+  <script src="profile/tabs/clients/EditClientDialogController.js"></script>
+
+  <script src="profile/tabs/resources/ResourceService.js"></script>
+  <script src="profile/tabs/resources/create-resources/ResourceCreateDialogController.js"></script>
+  <script src="profile/tabs/resources/database-picker/DatabasePickerDialogController.js"></script>
+
+  <script src="profile/tabs/resources/edit-resources/EditResourceDialogController.js"></script>
+  <script src="profile/tabs/resources/view-record/ViewRecordDetailsDialogController.js"></script>
+  <script src="profile/tabs/resources/import-resources/ImportResourceInstanceDialogController.js"></script>
+
+  <script src="profile/profile-details-dialog.controller.js"></script>
+  <script src="home/main-menu/create-profile/create-profile-wizard-controller.js"></script>
+  <script src="referenceData/reference-data-service.js"></script>
+
+  <script src="template/EditTemplateDialogController.js"></script>
+  <script src="template/frameEdit/EditFrameDialogController.js"></script>
+  <script src="template/TemplateInstanceService.js"></script>
+  <script src="template/linkDataSource/linkDataSourceDialogController.js"></script>
+  <script src="template/tableMapper/TableMapperDialogController.js"></script>
+  <script src="template/treeView/TreeTemplateViewController.js"></script>
+  <script src="template/attributeEdit/ResourceAttributesDialogController.js"></script>
+  <script src="template/importResourceTypes/ImportResourcesTypesDialogController.js"></script>
+  <script src="notifications/NotificationsService.js"></script>
+  <script src="notifications/NotificationsDialogController.js"></script>
+  <script src="template/envMappings/envMappingsController.js"></script>
+  <script src="template/jsonPathSelector/jsonPathSelectorDialogController.js"></script>
+
+  <script src="common/filters.js"></script>
+
+  <!-- Jobs Dialog -->
+  <script src="home/main-menu/jobs/jobService.js"></script>
+  <script src="home/main-menu/jobs/JobDefinitionsDialogController.js"></script>
+  <script src="home/main-menu/jobs/JobInstancesDialogController.js"></script>
+
+  <!-- Landing - DEBE CARGAR DESPUÉS DE VIDEO.JS -->
+  <script src="landing/LandingController.js"></script>
+
+  <!-- JSONPath Verification -->
+  <script>
+    setTimeout(function () {
+      console.log('=== JSONPath-Plus Verification ===');
+
+      if (typeof JSONPath !== 'undefined' && JSONPath.JSONPath) {
+        console.log('✅ JSONPath-Plus loaded successfully!');
+        console.log('✅ Global object:', JSONPath);
+        console.log('✅ Available properties:', Object.keys(JSONPath));
+
+        try {
+          const testObj = { users: [{ name: 'Alice' }, { name: 'Bob' }] };
+          const result = JSONPath.JSONPath({ path: '$.users[0].name', json: testObj });
+          console.log('✅ Test query result:', result);
+        } catch (error) {
+          console.error('❌ Test query failed:', error);
+        }
+      } else {
+        console.error('❌ JSONPath-Plus NOT loaded!');
+      }
+
+      console.log('=================================');
+    }, 500);
+  </script>
+</head>
+
+<body ng-app="bizmetryApp">
+  <noscript>
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+      <h1>Bizmetry - Business Metrics & Analytics Platform</h1>
+      <p>Welcome to Bizmetry, your comprehensive solution for business metrics and performance monitoring.</p>
+      <p><strong>JavaScript is required to use this application.</strong></p>
+    </div>
+  </noscript>
+
+  <div style="display:none" aria-hidden="true">
+    <h1>Bizmetry Platform</h1>
+    <p>Business metrics and analytics platform for real-time monitoring and performance optimization</p>
+  </div>
+
+  <bm-loading-indicator></bm-loading-indicator>
+  <div ng-view></div>
+
+</body>
+
+</html>

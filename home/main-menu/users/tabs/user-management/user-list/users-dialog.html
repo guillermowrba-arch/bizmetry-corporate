@@ -1,0 +1,244 @@
+<!-- Wrapper con padding y scroll para el contenido del tab -->
+<div class="users-tab-content" style="padding: 20px; padding-bottom: 80px;">
+
+    <!-- Barra de acciones superiores -->
+    <div layout="row" layout-align="space-between center" style="margin-bottom: 20px;">
+        <div layout="row" layout-align="start center">
+            <!-- Estadísticas -->
+            <md-card class="users-stats-card stat-active">
+                <div layout="row" layout-align="start center">
+                    <md-icon>check_circle</md-icon>
+                    <div>
+                        <div class="stat-value">{{getActiveCount()}}</div>
+                        <div class="stat-label">Active</div>
+                    </div>
+                </div>
+            </md-card>
+
+            <md-card class="users-stats-card stat-inactive">
+                <div layout="row" layout-align="start center">
+                    <md-icon>cancel</md-icon>
+                    <div>
+                        <div class="stat-value">{{getInactiveCount()}}</div>
+                        <div class="stat-label">Disabled</div>
+                    </div>
+                </div>
+            </md-card>
+
+            <md-card class="users-stats-card stat-total">
+                <div layout="row" layout-align="start center">
+                    <md-icon>group</md-icon>
+                    <div>
+                        <div class="stat-value">{{pagination.totalElements}}</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                </div>
+            </md-card>
+        </div>
+
+        <div layout="row" layout-align="end center">
+            <!-- Paginación -->
+            <div layout="row" layout-align="center center" style="margin-right: 16px;"
+                ng-if="pagination.totalElements > 0">
+                <md-button class="md-icon-button" ng-click="previousPage()" ng-disabled="pagination.currentPage === 0"
+                    aria-label="Previous page">
+                    <md-icon>chevron_left</md-icon>
+                </md-button>
+                <span class="page-number" style="padding: 0 12px; color: #666; font-size: 14px;">
+                    Page {{pagination.currentPage + 1}} of {{pagination.totalPages}}
+                </span>
+                <md-button class="md-icon-button" ng-click="nextPage()"
+                    ng-disabled="pagination.currentPage >= pagination.totalPages - 1" aria-label="Next page">
+                    <md-icon>chevron_right</md-icon>
+                </md-button>
+            </div>
+
+            <md-button class="md-raised users-dialog-enable-all-button" ng-click="enableAllUsers()">
+                <md-icon>check_circle</md-icon>
+                Enable All
+            </md-button>
+            <md-button class="md-raised users-dialog-disable-all-button" ng-click="disableAllUsers()"
+                style="margin-left: 8px;">
+                <md-icon>block</md-icon>
+                Disable All
+            </md-button>
+            <md-button class="md-raised md-primary users-dialog-primary-button" ng-click="createNewUser()"
+                style="margin-left: 8px;">
+                <md-icon>add</md-icon>
+                Create User
+            </md-button>
+        </div>
+    </div>
+
+    <!-- Panel de filtros - COMPACTO -->
+    <md-card class="users-filter-card compact-filters">
+        <md-card-content>
+            <div layout="row" layout-align="start center" layout-wrap class="filters-row">
+
+                <!-- Icono inline -->
+                <div flex="5" class="filter-icon">
+                    <md-icon style="color: #667eea;">filter_list</md-icon>
+                </div>
+
+                <!-- Name Filter -->
+                <div flex="25" class="filter-field">
+                    <div class="filter-title">NAME</div>
+                    <md-input-container class="md-block compact-input">
+                        <label>Name</label>
+                        <input type="text" ng-model="filters.name" ng-change="updateFilters()"
+                            placeholder="Filter by name...">
+                    </md-input-container>
+                </div>
+
+                <!-- Email Filter -->
+                <div flex="25" class="filter-field">
+                    <div class="filter-title">EMAIL</div>
+                    <md-input-container class="md-block compact-input">
+                        <label>Email</label>
+                        <input type="text" ng-model="filters.email" ng-change="updateFilters()"
+                            placeholder="Filter by email...">
+                    </md-input-container>
+                </div>
+
+                <!-- Status Filter -->
+                <div flex="20" class="filter-field">
+                    <div class="filter-title">STATUS</div>
+                    <md-input-container class="md-block compact-input">
+                        <label>Status</label>
+                        <md-select ng-model="filters.userEnabled" ng-change="applyFilters()">
+                            <md-option ng-repeat="option in statusOptions" ng-value="option.value">
+                                {{option.label}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+
+                <!-- Sort -->
+                <div flex="20" class="filter-field">
+                    <div class="filter-title">SORT BY</div>
+                    <md-input-container class="md-block compact-input">
+                        <label>Sort By</label>
+                        <md-select ng-model="pagination.sort" ng-change="onSortChange()">
+                            <md-option ng-repeat="option in sortOptions" ng-value="option.value">
+                                {{option.label}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <!-- Clear Button -->
+                <div flex="5" class="filter-clear">
+                    <md-button class="md-icon-button" ng-click="clearFilters()" aria-label="Clear filters">
+                        <md-icon>clear</md-icon>
+                    </md-button>
+                </div>
+
+            </div>
+        </md-card-content>
+    </md-card>
+
+
+    <!-- Loading Spinner -->
+    <div ng-if="loading" layout="row" layout-align="center center" style="padding: 60px;">
+        <md-progress-circular md-mode="indeterminate" md-diameter="60"></md-progress-circular>
+    </div>
+
+    <!-- Tabla de usuarios -->
+    <md-card class="users-table-card" ng-if="!loading" style="margin-bottom: 50px;">
+        <md-card-content style="padding-bottom: 40px;">
+            <!-- Mensaje si no hay usuarios -->
+            <div ng-if="filteredUsers.length === 0" layout="row" layout-align="center center" style="padding: 40px;">
+                <div style="text-align: center;">
+                    <md-icon style="font-size: 48px; color: #ccc;">people_outline</md-icon>
+                    <p style="color: #999; margin-top: 16px;">No users found</p>
+                </div>
+            </div>
+
+            <!-- Tabla de usuarios -->
+            <table class="users-table" ng-if="filteredUsers.length > 0">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Roles</th>
+                        <th>Confirmed</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in filteredUsers" class="user-row">
+                        <!-- Email -->
+                        <!-- Email -->
+                        <td class="user-email">
+                            <div class="email-cell">
+                                <user-avatar first-name="user.firstName" last-name="user.lastName" email="user.email"
+                                    size="small">
+                                </user-avatar>
+                                <span>{{user.email}}</span>
+                            </div>
+                        </td>
+
+                        <!-- Name -->
+                        <td class="user-name">
+                            {{user.firstName}} {{user.lastName}}
+                        </td>
+
+                        <!-- Roles - GRID LAYOUT CON MAX 3 COLUMNAS -->
+                        <td class="user-roles">
+                            <div class="roles-container" ng-if="user.userRoles && user.userRoles.length > 0">
+                                <generic-type-pill
+                                    ng-repeat="role in user.userRoles | orderBy:'name' track by (role.id || role.name)"
+                                    type="role.name">
+                                </generic-type-pill>
+                            </div>
+
+                            <span ng-if="!user.userRoles || user.userRoles.length === 0" class="no-roles">
+                                No roles
+                            </span>
+                        </td>
+
+
+                        <!-- Confirmed - SOLO SWITCH (SIEMPRE DESHABILITADO) -->
+                        <td style="min-width: 75px; text-align: center; padding: 6px 4px;">
+                            <md-switch ng-model="user.isConfirmed" ng-disabled="true" aria-label="Confirmation Status"
+                                class="md-accent compact-switch" style="margin: 0;">
+                            </md-switch>
+                        </td>
+
+                        <!-- Status - SOLO SWITCH -->
+                        <td style="min-width: 65px; text-align: center; padding: 6px 4px;">
+                            <md-switch ng-model="user.userEnabled" ng-change="toggleUserStatus(user)"
+                                ng-disabled="user.isSuperUser" aria-label="Enable/Disable User"
+                                class="md-primary compact-switch" style="margin: 0;">
+                            </md-switch>
+                        </td>
+
+                        <!-- Created -->
+                        <td class="user-created">
+                            {{formatDate(user.createdTs)}}
+                        </td>
+
+                        <!-- Actions -->
+                        <td class="user-actions">
+                            <md-button class="md-icon-button action-button" ng-click="editUser(user)"
+                                aria-label="Edit user">
+                                <md-icon>edit</md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button action-button" ng-click="deleteUser(user)"
+                                aria-label="Delete user" ng-disabled="user.isSuperUser">
+                                <md-icon>delete</md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button action-button" ng-click="resendConfirmationEmail(user)"
+                                aria-label="Resend confirmation email" ng-if="!user.isConfirmed">
+                                <md-icon>email</md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-card-content>
+    </md-card>
+
+</div>
+<!-- Fin del wrapper -->

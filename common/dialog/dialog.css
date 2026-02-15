@@ -1,0 +1,331 @@
+/* =====================================================
+   MODERN DIALOGS - COMPLETE STYLING
+   ===================================================== */
+
+/* Base dialog styling */
+.modern-dialog {
+  width: 600px;
+  max-width: 95vw;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Toolbar styling */
+.modern-dialog md-toolbar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.modern-dialog md-toolbar h2 {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+}
+
+.modern-dialog md-toolbar .md-icon-button {
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.modern-dialog md-toolbar .md-icon-button:hover {
+  transform: scale(1.1);
+}
+
+/* Content area */
+.modern-dialog md-dialog-content {
+  padding: 32px 24px;
+  background-color: #fafafa;
+}
+
+/* Actions area */
+.modern-dialog md-dialog-actions {
+  padding: 16px 24px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Button styling */
+.modern-dialog md-button {
+  border-radius: 6px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.modern-dialog md-button.md-raised {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modern-dialog md-button.md-raised:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.modern-dialog md-button md-icon {
+  margin-right: 6px;
+  font-size: 20px;
+}
+
+/* =====================================================
+   ERROR DIALOG
+   ===================================================== */
+
+.error-dialog md-toolbar {
+  background: linear-gradient(135deg, #f44336 0%, #e53935 100%);
+}
+
+.error-dialog .icon-wrapper {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(244, 67, 54, 0.2);
+  animation: pulse-error 2s ease-in-out infinite;
+}
+
+@keyframes pulse-error {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(244, 67, 54, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(244, 67, 54, 0.3);
+  }
+}
+
+.error-dialog .message-box {
+  background-color: #ffebee;
+  border: 2px solid #ef5350;
+  border-radius: 8px;
+  padding: 16px 20px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.error-dialog md-button.md-warn {
+  background-color: #f44336;
+  color: white;
+}
+
+.error-dialog md-button.md-warn:hover {
+  background-color: #e53935;
+  box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+/* =====================================================
+   SUCCESS DIALOG
+   ===================================================== */
+
+.success-dialog md-toolbar {
+  background: linear-gradient(135deg, #4caf50 0%, #43a047 100%);
+}
+
+.success-dialog .icon-wrapper {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.2);
+  animation: pulse-success 2s ease-in-out infinite;
+}
+
+@keyframes pulse-success {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(76, 175, 80, 0.3);
+  }
+}
+
+.success-dialog md-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.success-dialog md-button:hover {
+  background-color: #43a047;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+/* =====================================================
+   DECISION DIALOG
+   ===================================================== */
+
+.decision-dialog md-toolbar {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+}
+
+.decision-dialog .icon-wrapper {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffe8a1 100%);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(255, 193, 7, 0.2);
+  animation: pulse-warning 2s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 193, 7, 0.3);
+  }
+}
+
+.decision-dialog md-dialog-actions {
+  gap: 12px;
+}
+
+.decision-dialog .go-back-btn {
+  background-color: #757575;
+  color: white;
+}
+
+.decision-dialog .go-back-btn:hover {
+  background-color: #616161;
+}
+
+.decision-dialog md-button.md-warn {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.decision-dialog md-button.md-warn:hover {
+  background-color: #c62828;
+  box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
+}
+
+/* =====================================================
+   INFORMATION DIALOG
+   ===================================================== */
+
+.information-dialog md-toolbar {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+}
+
+.information-dialog .icon-wrapper {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(33, 150, 243, 0.2);
+  animation: pulse-info 2s ease-in-out infinite;
+}
+
+@keyframes pulse-info {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(33, 150, 243, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(33, 150, 243, 0.3);
+  }
+}
+
+.information-dialog md-button {
+  background-color: #2196f3;
+  color: white;
+}
+
+.information-dialog md-button:hover {
+  background-color: #1976d2;
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 600px) {
+  .modern-dialog {
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+  }
+
+  .modern-dialog md-dialog-content {
+    padding: 24px 16px;
+  }
+
+  .modern-dialog .icon-wrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .modern-dialog .icon-wrapper md-icon {
+    font-size: 48px !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .modern-dialog md-button {
+    min-width: 90px;
+    font-size: 13px;
+  }
+
+  .decision-dialog md-dialog-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .decision-dialog md-dialog-actions md-button {
+    width: 100%;
+  }
+
+  .error-dialog .message-box {
+    padding: 12px 16px;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY & POLISH
+   ===================================================== */
+
+/* Focus states */
+.modern-dialog md-button:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.2);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+.modern-dialog * {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text styling */
+.modern-dialog p {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Icon sizing consistency */
+.modern-dialog .icon-wrapper md-icon {
+  font-size: 56px;
+  width: 56px;
+  height: 56px;
+}

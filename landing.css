@@ -1,0 +1,48 @@
+.feature-box {
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5em;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 1em;
+    border-radius: 8px;
+    font-size: 0.9em;
+    z-index: 1;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  .feature-box:hover .tooltip {
+    display: block;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .logo-animated {
+    animation: fadeInUp 1s ease-out;
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 2em auto;
+  }
+
+  
+  

@@ -1,0 +1,23 @@
+<div class="bm-stepper" role="tablist" aria-label="Wizard progress">
+  <div class="bm-step" ng-repeat="s in steps track by $index"
+       ng-class="{'is-active': activeIndex == $index, 'is-completed': activeIndex > $index}">
+
+    <!-- círculo -->
+    <button type="button" class="circle md-button md-ink-ripple"
+            ng-class="{clickable: onStepClick && (activeIndex >= $index)}"
+            ng-click="maybeGoto($index)"
+            ng-attr-tabindex="{{ (onStepClick && activeIndex >= $index) ? 0 : -1 }}"
+            aria-hidden="false" aria-label="{{s.label}}">
+      <md-icon ng-if="activeIndex > $index">check</md-icon>
+      <span ng-if="activeIndex <= $index">{{$index + 1}}</span>
+    </button>
+
+    <!-- label -->
+    <div class="label" ng-bind="s.label"></div>
+
+    <!-- conector -->
+    <div class="connector" ng-if="$index < steps.length - 1">
+      <div class="bar" ng-style="{width: connectorFill($index)}"></div>
+    </div>
+  </div>
+</div>

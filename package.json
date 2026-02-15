@@ -1,0 +1,43 @@
+{
+  "name": "bizmetry-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for BizMetry Platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "angular": "^1.8.2",
+    "angular-animate": "^1.8.2",
+    "angular-aria": "^1.8.2",
+    "angular-material": "^1.2.2",
+    "chart.js": "^3.7.0",
+    "ngclipboard": "^1.1.1",
+    "node-forge": "^0.10.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^6.5.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.4",
+    "rimraf": "^3.0.2",
+    "style-loader": "^3.3.0",
+    "url-loader": "^4.1.1",
+    "svg-url-loader": "^3.0.0"
+  },
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tu-repositorio/issues"
+  },
+  "homepage": "https://github.com/tu-repositorio"
+}

@@ -1,0 +1,27 @@
+/* Bloquea scroll cuando hay loading */
+body.bm-loading-open { overflow: hidden; }
+
+/* Overlay que cubre toda la pantalla, centra el spinner y apaga el fondo */
+.bm-loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  background: transparent;    /* <- antes rgba(0,0,0,.35) */
+  backdrop-filter: none;       /* <- sin blur */
+}
+
+.bm-loading-overlay.visible { display: flex; }
+
+/* Spinner CSS (fallback si no hay Angular Material) */
+.css-spinner {
+  width: 64px; height: 64px;
+  border: 6px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: bmSpin .8s linear infinite;
+}
+
+@keyframes bmSpin { to { transform: rotate(360deg); } }

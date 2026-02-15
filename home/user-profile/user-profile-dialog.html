@@ -1,0 +1,176 @@
+<head>
+    <link rel="stylesheet" href="/home/user-profile/user-profile-dialog.css">
+</head>
+<md-dialog aria-label="User Profile" class="user-profile-dialog">
+
+    <!-- Toolbar -->
+    <md-toolbar class="dialog-toolbar">
+        <div class="md-toolbar-tools">
+            <md-icon class="toolbar-icon">account_circle</md-icon>
+            <h2 class="dialog-title">User Profile</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="closeDialog()" aria-label="Close">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <!-- Content -->
+    <md-dialog-content class="dialog-content">
+        <div class="profile-container">
+
+            <!-- User Avatar Section -->
+            <!-- User Avatar Section -->
+            <!-- User Avatar Section -->
+            <div class="profile-header">
+                <user-avatar first-name="user.firstName" last-name="user.lastName" email="user.email" size="xlarge">
+                </user-avatar>
+                <h3 class="user-full-name">{{ user.firstName }} {{ user.lastName }}</h3>
+                <p class="user-email-display">{{ user.email }}</p>
+            </div>
+
+            <div class="org-id-section">
+                <div class="org-id-container">
+                    <md-icon class="org-id-icon">fingerprint</md-icon>
+                    <div class="org-id-content">
+                        <span class="org-id-label">Organization ID</span>
+                        <span class="org-id-value">{{ user.id }}</span>
+                    </div>
+                    <md-button class="md-icon-button copy-btn" ng-click="copyOrgId()" aria-label="Copy Organization ID">
+                        <md-icon>content_copy</md-icon>
+                    </md-button>
+                </div>
+            </div>
+
+            <!-- User Details Grid -->
+            <div class="details-grid">
+
+                <!-- First Name -->
+                <div class="detail-row">
+                    <md-icon class="detail-icon">person</md-icon>
+                    <span class="detail-label">First Name</span>
+                    <span class="detail-value">{{ user.firstName || 'N/A' }}</span>
+                </div>
+
+                <!-- Last Name -->
+                <div class="detail-row">
+                    <md-icon class="detail-icon">person_outline</md-icon>
+                    <span class="detail-label">Last Name</span>
+                    <span class="detail-value">{{ user.lastName || 'N/A' }}</span>
+                </div>
+
+                <!-- Email -->
+                <div class="detail-row">
+                    <md-icon class="detail-icon">email</md-icon>
+                    <span class="detail-label">Email Address</span>
+                    <span class="detail-value">{{ user.email || 'N/A' }}</span>
+                </div>
+
+                <!-- Organization -->
+                <div class="detail-row">
+                    <md-icon class="detail-icon">business</md-icon>
+                    <span class="detail-label">Organization</span>
+                    <span class="detail-value">{{ user.orgName || 'N/A' }}</span>
+                </div>
+
+                <!-- Country -->
+                <div class="detail-row" ng-if="user.countryLabel">
+                    <md-icon class="detail-icon">public</md-icon>
+                    <span class="detail-label">Country</span>
+                    <span class="detail-value">{{ user.countryLabel }}</span>
+                </div>
+
+                <!-- State -->
+                <div class="detail-row" ng-if="user.stateLabel">
+                    <md-icon class="detail-icon">location_on</md-icon>
+                    <span class="detail-label">State</span>
+                    <span class="detail-value">{{ user.stateLabel }}</span>
+                </div>
+
+                <!-- Account Type -->
+                <div class="detail-row">
+                    <md-icon class="detail-icon">verified_user</md-icon>
+                    <span class="detail-label">Account Type</span>
+                    <span class="detail-value">
+                        <span class="account-type-pill" ng-if="user.accountType"
+                            ng-style="{'background-color': getAccountTypeColor(user.accountType)}">
+                            {{ user.accountType }}
+                        </span>
+                        <span ng-if="!user.accountType">N/A</span>
+                    </span>
+                </div>
+
+                <!-- Last Login -->
+                <div class="detail-row">
+                    <md-icon class="detail-icon">schedule</md-icon>
+                    <span class="detail-label">Last Login</span>
+                    <span class="detail-value">
+                        <span ng-if="user.lastLogin">{{ user.lastLogin | date:'medium' }}</span>
+                        <span ng-if="!user.lastLogin" class="no-data">Never</span>
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Roles Section -->
+            <div class="roles-section">
+                <div class="section-header">
+                    <md-icon class="section-icon">group</md-icon>
+                    <h4 class="section-title">Assigned Roles</h4>
+                </div>
+                <div class="roles-container">
+                    <div ng-if="user.roles && user.roles.length > 0" class="roles-pills">
+                        <span class="role-pill" ng-repeat="role in user.roles">
+                            <md-icon class="pill-icon">badge</md-icon>
+                            {{ role.name }}
+                        </span>
+                    </div>
+                    <div ng-if="!user.roles || user.roles.length === 0" class="no-roles">
+                        <md-icon class="empty-icon">info</md-icon>
+                        <span>No roles assigned</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Super User Badge -->
+            <div class="superuser-section" ng-if="user.isSuperUser">
+                <div class="superuser-badge">
+                    <md-icon class="superuser-icon">stars</md-icon>
+                    <span class="superuser-text">Super User</span>
+                </div>
+                <p class="superuser-description">
+                    This user has elevated privileges and full system access.
+                </p>
+            </div>
+
+        </div>
+    </md-dialog-content>
+
+    <!-- Actions -->
+    <!-- Actions -->
+    <md-dialog-actions class="dialog-actions">
+        <!-- Logout Button -->
+        <md-button class="md-raised" ng-click="logout()" aria-label="Logout">
+            <md-icon>exit_to_app</md-icon>
+            Logout
+        </md-button>
+
+        <!-- Edit Organization Button (Solo SuperUser) -->
+        <md-button class="md-raised md-warn" ng-if="isSuperUser()" ng-click="editOrganization()"
+            aria-label="Edit Organization">
+            <md-icon>business</md-icon>
+            Edit Organization
+        </md-button>
+
+        <!-- Edit Profile Button -->
+        <md-button class="md-raised md-accent" ng-click="changePassword()" aria-label="Edit Profile">
+            <md-icon>edit</md-icon>
+            Edit Profile
+        </md-button>
+
+        <span flex></span>
+
+    
+    </md-dialog-actions>
+
+</md-dialog>

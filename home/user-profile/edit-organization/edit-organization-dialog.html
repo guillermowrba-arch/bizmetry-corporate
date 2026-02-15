@@ -1,0 +1,131 @@
+<head>
+    <link rel="stylesheet" href="/home/user-profile/edit-organization/edit-organization-dialog.css">
+</head>
+<md-dialog aria-label="Edit Organization" class="edit-organization-dialog">
+
+    <!-- Toolbar -->
+    <md-toolbar class="dialog-toolbar">
+        <div class="md-toolbar-tools">
+            <md-icon class="toolbar-icon">business</md-icon>
+            <h2 class="dialog-title">Edit Organization</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <!-- Content -->
+    <md-dialog-content class="dialog-content">
+        
+        <!-- ✅ ORG ID SECTION -->
+        <div class="org-id-section">
+            <div class="org-id-container">
+                <md-icon class="org-id-icon">fingerprint</md-icon>
+                <div class="org-id-content">
+                    <span class="org-id-label">Organization ID</span>
+                    <span class="org-id-value">{{ accountId }}</span>
+                </div>
+                <md-button class="md-icon-button copy-btn" 
+                           ng-click="copyOrgId()" 
+                           aria-label="Copy ID">
+                    <md-icon>content_copy</md-icon>
+                </md-button>
+            </div>
+        </div>
+
+        <div class="form-container">
+
+            <!-- Organization Name -->
+            <div class="input-group">
+                <label class="input-label">
+                    <md-icon class="label-icon">business</md-icon>
+                    <span>Organization Name</span>
+                </label>
+                <md-input-container class="md-block custom-input">
+                    <input type="text" 
+                           ng-model="formData.organizationName" 
+                           required 
+                           ng-disabled="loading"
+                           placeholder="Enter organization name"
+                           maxlength="100">
+                </md-input-container>
+            </div>
+
+            <!-- Account Type -->
+            <div class="input-group">
+                <label class="input-label">
+                    <md-icon class="label-icon">verified_user</md-icon>
+                    <span>Account Type</span>
+                </label>
+                <md-input-container class="md-block custom-input">
+                    <md-select ng-model="formData.selectedAccountType" 
+                               ng-disabled="loading"
+                               placeholder="Select account type">
+                        <md-option ng-repeat="type in accountTypes" 
+                                   ng-value="type">
+                            {{ type.refObjectLabel }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <!-- Country -->
+            <div class="input-group">
+                <label class="input-label">
+                    <md-icon class="label-icon">public</md-icon>
+                    <span>Country</span>
+                </label>
+                <md-input-container class="md-block custom-input">
+                    <md-select ng-model="formData.selectedCountry" 
+                               ng-change="onCountryChange()"
+                               ng-disabled="loading"
+                               placeholder="Select country">
+                        <md-option ng-repeat="country in countries" 
+                                   ng-value="country">
+                            {{ country.refObjectLabel }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <!-- State -->
+            <div class="input-group">
+                <label class="input-label">
+                    <md-icon class="label-icon">location_on</md-icon>
+                    <span>State / Province</span>
+                </label>
+                <md-input-container class="md-block custom-input">
+                    <md-select ng-model="formData.selectedState" 
+                               ng-disabled="loading || !formData.selectedCountry"
+                               placeholder="Select state">
+                        <md-option ng-repeat="state in states" 
+                                   ng-value="state">
+                            {{ state.refObjectLabel }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+        </div>
+    </md-dialog-content>
+
+    <!-- Actions -->
+    <md-dialog-actions class="dialog-actions">
+        <md-button class="md-raised" ng-click="cancel()" ng-disabled="loading">
+            <md-icon>close</md-icon>
+            Cancel
+        </md-button>
+        
+        <span flex></span>
+        
+        <md-button class="md-raised md-primary" 
+                   ng-click="saveOrganization()" 
+                   ng-disabled="loading || !hasChanges()">
+            <md-icon>save</md-icon>
+            <span ng-if="!loading">Save Organization</span>
+            <span ng-if="loading">Saving...</span>
+        </md-button>
+    </md-dialog-actions>
+
+</md-dialog>

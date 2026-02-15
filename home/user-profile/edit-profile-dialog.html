@@ -1,0 +1,296 @@
+<head>
+  <link rel="stylesheet" href="/home/user-profile/edit-profile-dialog.css">
+</head>
+
+<md-dialog aria-label="Edit Profile" class="edit-profile-dialog">
+
+  <!-- Toolbar -->
+  <md-toolbar class="dialog-toolbar">
+    <div class="md-toolbar-tools">
+      <md-icon class="toolbar-icon">edit</md-icon>
+      <h2 class="dialog-title">Edit Profile</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()" aria-label="Close">
+        <md-icon>close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <!-- Content -->
+  <md-dialog-content class="dialog-content">
+    <form name="editProfileForm" novalidate>
+
+      <div class="form-container">
+
+        <!-- User Info Header -->
+        <!-- User Info Header -->
+        <!-- User Info Header -->
+        <div class="user-info-section">
+          <user-avatar first-name="formData.firstName" last-name="formData.lastName" email="userEmail" size="large">
+          </user-avatar>
+          <div class="user-details">
+            <p class="user-email">{{ userEmail }}</p>
+            <p class="info-text">Update your personal information and password</p>
+          </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- PERSONAL INFORMATION SECTION -->
+        <!-- ========================================= -->
+        <div class="section-card">
+          <div class="section-header">
+            <md-icon class="section-icon">person</md-icon>
+            <h3 class="section-title">Personal Information</h3>
+          </div>
+
+          <div layout="row" layout-wrap>
+            <!-- First Name Field -->
+            <div flex="100" flex-gt-sm="50" style="padding: 0 8px;">
+              <md-input-container class="md-block">
+                <label>First Name *</label>
+                <input type="text" name="firstName" ng-model="formData.firstName" ng-change="checkForChanges()"
+                  ng-disabled="isLoading" required minlength="2" maxlength="50" ng-pattern="/^[a-zA-ZÀ-ÿ\s'-]+$/"
+                  placeholder="Enter first name" aria-label="First Name">
+
+                <!-- Validation messages - prioritized, only ONE shows -->
+                <div ng-if="editProfileForm.firstName.$touched && editProfileForm.firstName.$invalid"
+                  style="margin-top: 4px;">
+                  <div ng-if="editProfileForm.firstName.$error.required" style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    First name is required
+                  </div>
+                  <div ng-if="!editProfileForm.firstName.$error.required && editProfileForm.firstName.$error.minlength"
+                    style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    First name must be at least 2 characters
+                  </div>
+                  <div
+                    ng-if="!editProfileForm.firstName.$error.required && !editProfileForm.firstName.$error.minlength && editProfileForm.firstName.$error.pattern"
+                    style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    Only letters, spaces, hyphens and apostrophes allowed
+                  </div>
+                </div>
+              </md-input-container>
+            </div>
+
+            <!-- Last Name Field -->
+            <div flex="100" flex-gt-sm="50" style="padding: 0 8px;">
+              <md-input-container class="md-block">
+                <label>Last Name *</label>
+                <input type="text" name="lastName" ng-model="formData.lastName" ng-change="checkForChanges()"
+                  ng-disabled="isLoading" required minlength="2" maxlength="50" ng-pattern="/^[a-zA-ZÀ-ÿ\s'-]+$/"
+                  placeholder="Enter last name" aria-label="Last Name">
+
+                <!-- Validation messages - prioritized, only ONE shows -->
+                <div ng-if="editProfileForm.lastName.$touched && editProfileForm.lastName.$invalid"
+                  style="margin-top: 4px;">
+                  <div ng-if="editProfileForm.lastName.$error.required" style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    Last name is required
+                  </div>
+                  <div ng-if="!editProfileForm.lastName.$error.required && editProfileForm.lastName.$error.minlength"
+                    style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    Last name must be at least 2 characters
+                  </div>
+                  <div
+                    ng-if="!editProfileForm.lastName.$error.required && !editProfileForm.lastName.$error.minlength && editProfileForm.lastName.$error.pattern"
+                    style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    Only letters, spaces, hyphens and apostrophes allowed
+                  </div>
+                </div>
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================= -->
+        <!-- CHANGE PASSWORD SECTION (OPTIONAL) -->
+        <!-- ========================================= -->
+        <div class="section-card">
+          <div class="section-header">
+            <md-icon class="section-icon">lock</md-icon>
+            <h3 class="section-title">Change Password</h3>
+            <span class="optional-badge">(Optional)</span>
+          </div>
+
+          <p class="section-description">
+            Leave password fields empty if you don't want to change your password
+          </p>
+
+          <div layout="row" layout-wrap>
+            <!-- New Password Field -->
+            <div flex="100" flex-gt-sm="50" style="padding: 0 8px;">
+              <md-input-container class="md-block">
+                <label>New Password</label>
+                <div style="position: relative;">
+                  <input ng-attr-type="{{showPassword ? 'text' : 'password'}}" name="newPassword"
+                    ng-model="formData.newPassword" ng-change="validatePasswordMatch()" ng-disabled="isLoading"
+                    minlength="8" ng-pattern="passwordPattern" ng-required="!!formData.confirmPassword"
+                    placeholder="Enter new password" style="padding-right: 40px;" aria-label="New Password">
+                  <md-button class="md-icon-button reveal-password-btn" ng-mousedown="showPassword = true"
+                    ng-mouseup="showPassword = false" ng-mouseleave="showPassword = false" aria-label="Reveal password"
+                    tabindex="-1" type="button">
+                    <md-icon ng-if="!showPassword">visibility</md-icon>
+                    <md-icon ng-if="showPassword">visibility_off</md-icon>
+                    <md-tooltip md-direction="top">Hold to reveal password</md-tooltip>
+                  </md-button>
+                </div>
+
+                <!-- Validation messages - prioritized, only ONE shows -->
+                <div ng-if="editProfileForm.newPassword.$touched && editProfileForm.newPassword.$invalid"
+                  style="margin-top: 4px;">
+                  <div ng-if="editProfileForm.newPassword.$error.required" style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    Password is required if changing
+                  </div>
+                  <div
+                    ng-if="!editProfileForm.newPassword.$error.required && editProfileForm.newPassword.$error.minlength"
+                    style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    Password must be at least 8 characters
+                  </div>
+                  <div
+                    ng-if="!editProfileForm.newPassword.$error.required && !editProfileForm.newPassword.$error.minlength && editProfileForm.newPassword.$error.pattern"
+                    style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    Must have: 1 uppercase, 1 number, 1 special (#@_!$)
+                  </div>
+                </div>
+
+                <!-- Password strength indicator -->
+                <div ng-if="formData.newPassword && formData.newPassword.length > 0" style="margin-top: 8px;">
+                  <div style="font-size: 13px; color: #666; margin-bottom: 4px;">Password strength:</div>
+                  <md-progress-linear md-mode="determinate" value="{{getPasswordStrength()}}" ng-class="{
+                      'md-warn': getPasswordStrength() < 50,
+                      'md-accent': getPasswordStrength() >= 50 && getPasswordStrength() < 80,
+                      'md-primary': getPasswordStrength() >= 80
+                    }">
+                  </md-progress-linear>
+                </div>
+
+                <!-- Password requirements helper - very small text -->
+                <div ng-if="formData.newPassword"
+                  style="font-size: 10px; color: #999; margin-top: 4px; line-height: 1.3;">
+                  Min 8 chars • 1 uppercase • 1 number • 1 special (#@_!$)
+                </div>
+
+                <!-- Auto-Generate Button -->
+                <div ng-if="!isLoading" style="margin-top: 8px;">
+                  <md-button class="md-raised auto-generate-password-btn" ng-click="autoGeneratePassword()">
+                    <md-icon>vpn_key</md-icon>
+                    Auto-Generate
+                  </md-button>
+                </div>
+              </md-input-container>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div flex="100" flex-gt-sm="50" style="padding: 0 8px;">
+              <md-input-container class="md-block">
+                <label>Confirm New Password</label>
+                <div style="position: relative;">
+                  <input ng-attr-type="{{showPasswordConfirm ? 'text' : 'password'}}" name="confirmPassword"
+                    ng-model="formData.confirmPassword" ng-change="validatePasswordMatch()" ng-disabled="isLoading"
+                    ng-required="!!formData.newPassword" placeholder="Confirm new password" style="padding-right: 40px;"
+                    aria-label="Confirm New Password">
+                  <md-button class="md-icon-button reveal-password-btn" ng-mousedown="showPasswordConfirm = true"
+                    ng-mouseup="showPasswordConfirm = false" ng-mouseleave="showPasswordConfirm = false"
+                    aria-label="Reveal password confirmation" tabindex="-1" type="button">
+                    <md-icon ng-if="!showPasswordConfirm">visibility</md-icon>
+                    <md-icon ng-if="showPasswordConfirm">visibility_off</md-icon>
+                    <md-tooltip md-direction="top">Hold to reveal password</md-tooltip>
+                  </md-button>
+                </div>
+
+                <!-- Validation messages - prioritized, only ONE shows -->
+                <div ng-if="editProfileForm.confirmPassword.$touched && editProfileForm.confirmPassword.$invalid"
+                  style="margin-top: 4px;">
+                  <div ng-message="required" style="color: #f44336; font-size: 14px;">
+                    <md-icon
+                      style="font-size: 16px; height: 16px; width: 16px; vertical-align: middle; margin-right: 4px;">error</md-icon>
+                    Password confirmation is required
+                  </div>
+                </div>
+
+                <!-- Password match validation -->
+                <div ng-if="passwordValidation.checked && !passwordValidation.match"
+                  style="color: #f44336; font-size: 14px; margin-top: 4px;">
+                  <md-icon style="font-size: 16px; height: 16px; width: 16px; margin-right: 4px;">error</md-icon>
+                  Passwords do not match
+                </div>
+                <div
+                  ng-if="passwordValidation.checked && passwordValidation.match && formData.newPassword && formData.newPassword.length >= 8"
+                  style="color: #4caf50; font-size: 14px; margin-top: 4px;">
+                  <md-icon style="font-size: 16px; height: 16px; width: 16px; margin-right: 4px;">check_circle</md-icon>
+                  Passwords match
+                </div>
+              </md-input-container>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Message Display -->
+        <div class="error-alert" ng-if="errorMessage">
+          <md-icon class="alert-icon">error</md-icon>
+          <span class="alert-text">{{ errorMessage }}</span>
+        </div>
+
+        <!-- Success Message Display -->
+        <div class="success-alert" ng-if="successMessage">
+          <md-icon class="alert-icon">check_circle</md-icon>
+          <span class="alert-text">{{ successMessage }}</span>
+        </div>
+
+        <!-- Summary Card - Solo aparece cuando hay cambios Y el form es válido -->
+        <md-card ng-if="hasChanges && editProfileForm.$valid"
+          style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-top: 20px;">
+          <md-card-content>
+            <div layout="row" layout-align="start center">
+              <md-icon style="color: white; margin-right: 12px;">check_circle</md-icon>
+              <div>
+                <div style="font-weight: 500; font-size: 16px;">Ready to save changes</div>
+                <div style="font-size: 14px; opacity: 0.9;">
+                  {{formData.firstName}} {{formData.lastName}}
+                  <span ng-if="formData.newPassword"> · Password will be updated</span>
+                </div>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+
+      </div>
+
+    </form>
+  </md-dialog-content>
+
+  <!-- Actions -->
+  <md-dialog-actions class="dialog-actions">
+    <md-button class="md-raised" ng-click="cancel()" ng-disabled="isLoading" type="button">
+      <md-icon>close</md-icon>
+      Cancel
+    </md-button>
+
+    <span flex></span>
+
+    <md-button class="md-raised md-primary save-button-no-animation" ng-click="saveChanges()"
+      ng-disabled="editProfileForm.$invalid || isLoading || !hasChanges" type="button">
+      <md-progress-circular ng-if="isLoading" md-mode="indeterminate" md-diameter="20" style="margin-right: 8px;">
+      </md-progress-circular>
+      <md-icon ng-if="!isLoading">check</md-icon>
+      {{ isLoading ? 'Saving...' : 'Save Changes' }}
+    </md-button>
+  </md-dialog-actions>
+
+</md-dialog>

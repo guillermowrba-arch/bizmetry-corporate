@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log4AI - Business-Centric Telemetry</title>
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      text-align: center;
+      padding: 10% 5%;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+
+    h2 {
+      font-weight: 300;
+      font-size: 1.5em;
+      margin-bottom: 2.5em;
+      color: #cfd8dc;
+    }
+
+    .animated-description {
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2em;
+      margin-bottom: 3em;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5em;
+      border-radius: 12px;
+      width: 260px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .feature-box:hover {
+      transform: scale(1.03);
+    }
+
+    .feature-box h3 {
+      margin-bottom: 0.5em;
+      font-size: 1.2em;
+      color: #ffffff;
+    }
+
+    .tooltip {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      margin-top: 1em;
+      padding: 1em;
+      font-size: 0.9em;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      text-align: left;
+      color: #cfd8dc;
+    }
+
+    .feature-box:hover .tooltip {
+      display: block;
+    }
+
+    .login-button {
+      padding: 0.8em 2em;
+      font-size: 1.1em;
+      background-color: #00bcd4;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-decoration: none;
+      color: white;
+    }
+
+    .login-button:hover {
+      background-color: #0097a7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="images/bizmetry-logo-white-translucid.png" alt="BizMetry Logo" class="logo-animated" />
+    <h1>Welcome to BizMetry!</h1>
+    <h2 class="animated-description" style="max-width: 800px; margin: 0 auto 2.5em;">
+      BizMetry is an enterprise-grade, next-generation business-centric telemetry platform that embraces a low-code/no-code paradigm to streamline the capture of business-centric application and resource insights. By shifting focus from fragmented infrastructure metrics to holistic ASBOs, BizMetry empowers organizations with scalable, actionable intelligence to drive operational excellence and informed decision-making.  </h2>
+
+    <div class="features">
+      <div class="feature-box">
+        <h3>Define your metrics</h3>
+        <p>Create structured business/resource metrics tailored to your needs.</p>
+        <div class="tooltip">
+          Create structured business and resource metrics by defining your own clients, resources, and attributes. Track what truly matters to your business.
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <h3>Create your own clients and resources</h3>
+        <p>Define and map clients to monitoring resources easily.</p>
+        <div class="tooltip">
+          Design your client-resource model by creating entities that reflect your business. Monitor specific client behavior mapped to relevant operational resources.
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <h3>Deploy your agents</h3>
+        <p>Connect your apps to the BizMetry agent and start collecting insights.</p>
+        <div class="tooltip">
+          Install BizMetry agents within your infrastructure. Agents stream structured telemetry data asynchronously from your applications to the platform.
+        </div>
+      </div>
+
+      <div class="feature-box">
+        <h3>View your metrics</h3>
+        <p>Analyze business performance through powerful dashboards.</p>
+        <div class="tooltip">
+          Use the BizMetry UI to explore trends, visualize metrics, and generate advanced business-centric reports. Drive data-informed decisions effectively.
+        </div>
+      </div>
+    </div>
+
+    <a class="login-button" href="/login">Login</a>
+  </div>
+</body>
+</html>
