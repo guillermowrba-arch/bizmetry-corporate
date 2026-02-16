@@ -82,11 +82,11 @@
   <link rel="stylesheet" href="common/loadingSpinner/loadingSpinnerStyles.css" />
   <link rel="stylesheet" href="common/dialog/dialog.css" />
   <link rel="stylesheet" href="common/stepper/bmStepper.css" />
-  <link rel="stylesheet" href="jobs/job-definitions-dialog.css" />
-  <link rel="stylesheet" href="login/logout-dialog.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-tree/2.22.6/angular-ui-tree.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/6.4.3/rzslider.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+  
 
   <!-- 🎬 VIDEO.JS CSS -->
   <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
@@ -142,89 +142,7 @@
   <script
     src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
-  <!-- 🎬 VIDEO.JS SCRIPT - DEBE IR ANTES DE LandingController.js -->
-  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
-
-  <script src="login/AuthService.js"></script>
-  <script src="login/loginController.js"></script>
-  <script src="register/register.js"></script>
-  <script src="activation/AccountActivationController.js"></script>
-  <script src="activation/UserActivationController.js"></script>
-  <script src="home/HomeController.js"></script>
-  <script src="home/user-profile/UserProfileDialogController.js"></script>
-  <script src="home/user-profile/EditProfileDialogController.js"></script>
-  <script src="home/user-profile/edit-organization/EditOrganizationDialogController.js"></script>
-
-  <script src="datasources/DatasourceDialogController.js"></script>
-  <script src="datasources/ConnectionResultDialogController.js"></script>
-  <script src="datasources/DatasourceEditDialogController.js"></script>
-  <script src="datasources/DatasourceService.js"></script>
-
-  <script src="profile/tabs/template/TemplateTabController.js"></script>
-  <script src="profile/tabs/environments/EnvWorkflowViewer.js"></script>
-  <script src="profile/tabs/environments/EditEnvironmentDialogController.js"></script>
-  <script src="profile/tabs/agents/configuration/AgentConfigService.js"></script>
-  <script src="profile/tabs/agents/logs/AgentLogsService.js"></script>
-  <script src="home/main-menu/agent-panel/AgentsPanelController.js"></script>
-  <script src="home/main-menu/users/usersDialogController.js"></script>
-  <script src="home/main-menu/users/tabs/roles-and-permissions/roles-tab-controller.js"></script>
-  <script src="home/main-menu/users/tabs/service-accounts/sa-tab-controller.js"></script>
-  <script src="home/main-menu/users/tabs/user-management/user-list/users-tab-controller.js"></script>
-  <script src="home/main-menu/users/tabs/user-management/user-management-controller.js"></script>
-  <script src="home/main-menu/users/tabs/user-management/create/UserCreateDialogController.js"></script>
-  <script src="home/main-menu/users/tabs/user-management/edit/UserEditDialogController.js"></script>
-  <script src="home/main-menu/users/tabs/user-management/usersService.js"></script>
-  <script src="home/main-menu/users/tabs/roles-and-permissions/RolesService.js"></script>
-  <script src="home/main-menu/users/tabs/service-accounts/ServiceAccount.js"></script>
-
-  <script src="profile/tabs/agents/download/DownloadDialogController.js"></script>
-  <script src="profile/tabs/agents/logs/LogDetailDialogController.js"></script>
-  <script src="profile/tabs/agents/configuration/AgentConfigDialogController.js"></script>
-  <script src="profile/tabs/agents/logs/AgentLogsDialogController.js"></script>
-  <script src="common/components/AgentStatusPill.js"></script>
-  <!-- User Avatar Component -->
-  <script src="common/components/UserAvatar/UserAvatar.js"></script>
-
-  <script src="profile/tabs/agents/TelemetryAgentService.js"></script>
-  <script src="profile/tabs/agents/download/DownloadService.js"></script>
-  <script src="profile/tabs/agents/stats/AgentStatsDialogController.js"></script>
-
-  <script src="profile/ProfileService.js"></script>
-  <script src="profile/tabs/clients/ClientService.js"></script>
-  <script src="profile/tabs/clients/ClientCreateDialogController.js"></script>
-  <script src="profile/tabs/clients/EditClientDialogController.js"></script>
-
-  <script src="profile/tabs/resources/ResourceService.js"></script>
-  <script src="profile/tabs/resources/create-resources/ResourceCreateDialogController.js"></script>
-  <script src="profile/tabs/resources/database-picker/DatabasePickerDialogController.js"></script>
-
-  <script src="profile/tabs/resources/edit-resources/EditResourceDialogController.js"></script>
-  <script src="profile/tabs/resources/view-record/ViewRecordDetailsDialogController.js"></script>
-  <script src="profile/tabs/resources/import-resources/ImportResourceInstanceDialogController.js"></script>
-
-  <script src="profile/profile-details-dialog.controller.js"></script>
-  <script src="home/main-menu/create-profile/create-profile-wizard-controller.js"></script>
-  <script src="referenceData/reference-data-service.js"></script>
-
-  <script src="template/EditTemplateDialogController.js"></script>
-  <script src="template/frameEdit/EditFrameDialogController.js"></script>
-  <script src="template/TemplateInstanceService.js"></script>
-  <script src="template/linkDataSource/linkDataSourceDialogController.js"></script>
-  <script src="template/tableMapper/TableMapperDialogController.js"></script>
-  <script src="template/treeView/TreeTemplateViewController.js"></script>
-  <script src="template/attributeEdit/ResourceAttributesDialogController.js"></script>
-  <script src="template/importResourceTypes/ImportResourcesTypesDialogController.js"></script>
-  <script src="notifications/NotificationsService.js"></script>
-  <script src="notifications/NotificationsDialogController.js"></script>
-  <script src="template/envMappings/envMappingsController.js"></script>
-  <script src="template/jsonPathSelector/jsonPathSelectorDialogController.js"></script>
-
   <script src="common/filters.js"></script>
-
-  <!-- Jobs Dialog -->
-  <script src="home/main-menu/jobs/jobService.js"></script>
-  <script src="home/main-menu/jobs/JobDefinitionsDialogController.js"></script>
-  <script src="home/main-menu/jobs/JobInstancesDialogController.js"></script>
 
   <!-- Landing - DEBE CARGAR DESPUÉS DE VIDEO.JS -->
   <script src="landing/LandingController.js"></script>

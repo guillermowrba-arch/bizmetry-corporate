@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bizmetryApp">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="BizMetry - Business-centric telemetry & observability services, BizMetry Platform SaaS, GenAI/Agentic AI training, and Agentic Registry OSS for governance.">
+  <title>BizMetry – Business-Centric Telemetry Services</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Angular Material CSS -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.1/angular-material.min.css">
+
+  <!-- Consolidated CSS -->
+  <link rel="stylesheet" href="/landing/landing.css" />
+</head>
+
+<body ng-controller="LandingCtrl" class="landing-container">
+
+  <!-- TOP LOGO -->
+  <header class="corp-topbar">
+    <div class="corp-topbar-inner">
+      <img class="corp-topbar-logo" src="/assets/logos/bizmetry-logo-gradient.png" alt="BizMetry" />
+      <div class="corp-topbar-tag">
+        <span class="material-icons">verified</span>
+        Business-Centric Telemetry & Observability Services
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="corp-hero">
+    <div class="corp-container">
+
+      <div class="hero-grid">
+        <!-- Left -->
+        <div class="hero-card">
+          <h1 class="hero-title">
+            BizMetry delivers<br />
+            <span class="gradient-text">business-centric observability</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            We are an organization focused on enabling real-time visibility into what matters most:
+            your <strong>business KPIs</strong>. Our primary offering is <strong>BizMetry Platform®</strong>,
+            a SaaS solution that blends telemetry, observability, and infrastructure signals to accelerate
+            the capture of business metrics through a distributed architecture.
+          </p>
+
+          <div class="hero-actions">
+            <md-button class="md-raised cta-primary" ng-click="goToLogin($event)">
+              <span class="material-icons">rocket_launch</span>
+              Go to Bizmetry Platform
+            </md-button>
+
+            <md-button class="md-raised cta-secondary" ng-click="goToEvents($event)">
+              <span class="material-icons">event</span>
+              Go To Events
+            </md-button>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="quick-facts">
+          <div class="fact">
+            <span class="material-icons">bolt</span>
+            <div>
+              <h4>Real-time KPI telemetry</h4>
+              <p>Capture and act on business events as they happen, not hours later.</p>
+            </div>
+          </div>
+
+          <div class="fact">
+            <span class="material-icons">hub</span>
+            <div>
+              <h4>Distributed architecture</h4>
+              <p>Lightweight agents collect signals across environments and stream them asynchronously.</p>
+            </div>
+          </div>
+
+          <div class="fact">
+            <span class="material-icons">account_tree</span>
+            <div>
+              <h4>ASBO-driven modeling</h4>
+              <p>Define metrics around Application-Specific Business Objects to preserve business context.</p>
+            </div>
+          </div>
+
+          <div class="fact">
+            <span class="material-icons">shield</span>
+            <div>
+              <h4>Enterprise-grade approach</h4>
+              <p>Designed for governance, scale, and operational reliability from day one.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- SERVICES SECTION -->
+  <section class="section">
+    <div class="corp-container">
+      <h2 class="section-title">Our Services Portfolio</h2>
+      <p class="section-lead">
+        BizMetry combines product innovation with community-driven initiatives. We help organizations
+        adopt business-centric observability, and we also contribute to the Agentic ecosystem with
+        open-source governance tooling and free educational programs.
+      </p>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="svc">
+          <div class="svc-head">
+            <span class="material-icons">insights</span>
+            <h3>Business-Centric Telemetry & Observability</h3>
+          </div>
+          <p>
+            We offer services and guidance to model, capture, and operationalize real-time business KPIs
+            by connecting application signals with infrastructure and runtime telemetry.
+          </p>
+          <ul>
+            <li>Business KPI discovery & ASBO modeling</li>
+            <li>Telemetry strategy and rollout playbooks</li>
+            <li>Dashboards, alerts, and operational adoption</li>
+          </ul>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="svc">
+          <div class="svc-head">
+            <span class="material-icons">cloud</span>
+            <div class="svc-title-wrapper">
+              <h3>BizMetry Platform® (SaaS)</h3>
+              <span class="svc-badge badge-alpha">Still in Alpha</span>
+            </div>
+          </div>
+          <p>
+            BizMetry Platform® is a SaaS solution that simplifies business KPI capture at scale.
+            It blends telemetry, observability, and infrastructure signals to accelerate real-time metrics
+            through a distributed architecture.
+          </p>
+          <ul>
+            <li>Low-code / template-driven telemetry acceleration</li>
+            <li>Distributed agents across environments</li>
+            <li>Real-time dashboards and business event visibility</li>
+          </ul>
+
+          <div class="hero-actions">
+            <md-button class="md-raised cta-primary" ng-click="openVideo()">
+              <span class="material-icons">play_circle_filled</span>
+              Watch BizMetry Introduction Video
+            </md-button>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="svc">
+          <div class="svc-head">
+            <span class="material-icons">psychology</span>
+            <h3>Generative AI & Agentic AI Services</h3>
+          </div>
+          <p>
+            We support the community with practical, no-hype educational programs. BizMetry provides
+            <strong>free trainings</strong> to help professionals understand GenAI and Agentic AI fundamentals.
+          </p>
+          <ul>
+            <li>Free trainings & community induction sessions</li>
+            <li>Fundamentals: LLMs, prompting, evaluation, Agentic patterns</li>
+            <li>Practical guidance for real-world adoption</li>
+          </ul>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="svc">
+          <div class="svc-head">
+            <span class="material-icons">badge</span>
+            <div class="svc-title-wrapper">
+              <h3>Agentic Registry OSS</h3>
+              <span class="svc-badge badge-opensource">Open Source</span>
+            </div>
+          </div>
+          <p>
+            Agentic Registry is an open-source solution to implement governance quickly in Agentic
+            architectures, providing a central registry where <strong>MCP Servers</strong> and <strong>Agents</strong>
+            can register and be discovered by AI applications.
+          </p>
+          <ul>
+            <li>Unified visibility of available agentic services</li>
+            <li>Registration, discovery, and metadata-driven governance</li>
+            <li>Accelerates adoption of MCP-based ecosystems</li>
+          </ul>
+          <div class="hero-actions">
+            <a href="/assets/documents/agentic-registry-oss.pdf" target="_blank" class="md-raised cta-primary"
+              style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; text-decoration: none;">
+              <span class="material-icons">visibility</span>
+              <span>View Brochure</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- PDF Dialog -->
+        <md-dialog ng-show="pdfDialogVisible" aria-label="Agentic Registry OSS Brochure">
+          <md-dialog-content>
+            <div id="pdfViewer" style="height: 500px; width: 100%;"></div>
+          </md-dialog-content>
+          <md-dialog-actions>
+            <md-button class="md-primary" ng-click="closePdfDialog()">
+              Close
+            </md-button>
+          </md-dialog-actions>
+        </md-dialog>
+
+        <!-- Service 5 -->
+        <div class="svc">
+          <div class="svc-head">
+            <span class="material-icons">engineering</span>
+            <h3>Professional Services</h3>
+          </div>
+          <p>
+            We offer a range of professional services to help organizations optimize the BizMetry Platform. Our team
+            provides expert consultancy from platform assessment and configuration to metric definition and report
+            generation. We ensure seamless integration and efficient adoption of the platform.
+          </p>
+          <ul>
+            <li>Assessment and alignment with business objectives.</li>
+            <li>Platform configuration and metric definition.</li>
+            <li>Support for generating reports and visualizations.</li>
+          </ul>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="svc">
+          <div class="svc-head">
+            <span class="material-icons">handshake</span>
+            <h3>BizMetry Private Cloud Edition</h3>
+          </div>
+          <p>
+            We offer installation and configuration of BizMetry Platform within your data center. This solution is ideal
+            for organizations with strict data privacy policies. It ensures compliance with regulatory requirements
+            while providing full BizMetry functionality.
+          </p>
+          <ul>
+            <li>Compliance with data privacy and regulatory requirements.</li>
+            <li>Full control over sensitive data with BizMetry capabilities.</li>
+            <li>Dedicated workforce co-located with your internal teams.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- FINAL CTA SECTION -->
+  <section class="section" style="padding-top:54px;">
+    <div class="corp-container">
+      <div class="hero-card" style="padding:28px 26px;">
+        <h2 class="section-title" style="margin-bottom:6px;">Explore BizMetry</h2>
+        <p class="section-lead" style="margin-bottom:18px;">
+          Whether you're modernizing observability, building Agentic governance, or learning GenAI foundations,
+          BizMetry helps you move faster with clarity and real-world pragmatism.
+        </p>
+
+        <div class="hero-actions">
+          <md-button class="md-raised cta-primary" ng-click="goToLogin($event)">
+            <span class="material-icons">rocket_launch</span>
+            Go to Bizmetry Platform
+          </md-button>
+
+          <md-button class="md-raised cta-secondary" ng-click="goToEvents($event)">
+            <span class="material-icons">event</span>
+            Go To Events
+          </md-button>
+
+          <md-button class="md-raised cta-outline" ng-click="showContactForm = true">
+            <span class="material-icons">mail</span>
+            Contact Us
+          </md-button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <div class="contact-form-wrapper" ng-show="showContactForm" ng-click="showContactForm = false">
+    <div class="contact-form" ng-click="$event.stopPropagation()">
+      <div class="form-header">
+        <h3>Get in Touch</h3>
+        <md-button class="md-icon-button" ng-click="showContactForm = false">
+          <span class="material-icons">close</span>
+        </md-button>
+      </div>
+
+      <div ng-if="contactTooltipVisible" class="success-message">
+        <span class="material-icons">check_circle</span>
+        <span>Message sent successfully! We'll get back to you soon.</span>
+      </div>
+
+      <form name="contactForm" novalidate>
+        <md-input-container class="md-block">
+          <label>Full Name</label>
+          <input type="text" name="name" ng-model="contact.name" required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>Email Address</label>
+          <input type="email" name="email" ng-model="contact.email" required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>Message</label>
+          <textarea name="message" ng-model="contact.message" rows="4" required></textarea>
+        </md-input-container>
+
+        <md-button class="md-raised submit-button" ng-click="sendContact()"
+          ng-disabled="contactForm.$invalid || sendingContact">
+          <md-progress-circular ng-if="sendingContact" md-mode="indeterminate" md-diameter="20">
+          </md-progress-circular>
+          <span ng-if="!sendingContact">Send Message</span>
+          <span ng-if="sendingContact">Sending...</span>
+        </md-button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="corp-footer">
+    <p>&copy; 2025 BizMetry. All rights reserved.</p>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS - Orden correcto de carga -->
+  <!-- ============================================ -->
+
+  <!-- 1. Angular Core -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-messages.min.js"></script>
+
+  <!-- 2. Angular Material JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.1/angular-material.min.js"></script>
+
+  <!-- 3. PDF.js Library - Versión más reciente desde jsdelivr -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+
+  <!-- 3.5 Debug Script - Verificar qué se cargó -->
+  <script>
+    console.log('=== DEBUGGING SCRIPT LOADING ===');
+    console.log('1. Angular loaded?', typeof angular !== 'undefined' ? '✅ YES' : '❌ NO');
+    console.log('2. Angular version:', typeof angular !== 'undefined' ? angular.version : 'N/A');
+    console.log('3. PDF.js loaded?', typeof pdfjsLib !== 'undefined' ? '✅ YES' : '❌ NO');
+    console.log('3b. window.pdfjsLib?', typeof window.pdfjsLib !== 'undefined' ? '✅ YES' : '❌ NO');
+    console.log('4. PDF.js version:', typeof pdfjsLib !== 'undefined' ? pdfjsLib.version : 'N/A');
+
+    // Listar todas las variables globales que contienen 'pdf'
+    console.log('5. Global vars with "pdf":', Object.keys(window).filter(k => k.toLowerCase().includes('pdf')));
+
+    // Si PDF.js está cargado, configurar el worker AQUÍ MISMO
+    if (typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+      console.log('6. PDF.js worker configured ✅');
+      console.log('7. Worker path:', pdfjsLib.GlobalWorkerOptions.workerSrc);
+    } else {
+      console.error('6. PDF.js NOT LOADED - Cannot configure worker ❌');
+      console.error('   Check network tab in DevTools for failed requests');
+      console.error('   Check if ad blocker or firewall is blocking CDN');
+    }
+  </script>
+
+  <!-- 4. Your App Module (debe existir antes del controller) -->
+  <script>
+    // Si no tienes un app.js separado, define el módulo aquí
+    angular.module('bizmetryApp', ['ngMaterial', 'ngMessages']);
+    console.log('6. Angular module "bizmetryApp" created ✅');
+  </script>
+
+  <!-- 5. Your Controller -->
+  <script src="/landing/landing-controller.js"></script>
+  <script>
+    console.log('7. Controller script loaded (check for errors above) ✅');
+    console.log('=== END DEBUGGING ===');
+  </script>
+
+</body>
+
+</html>
