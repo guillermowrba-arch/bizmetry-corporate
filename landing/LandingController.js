@@ -70,6 +70,23 @@ angular.module('bizmetryApp').controller('LandingCtrl', function ($scope, $windo
     $window.location.replace('/events/events.html');
   };
 
+  $scope.goToDocs = function ($event) {
+    if ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+    }
+    $window.location.replace('https://docs.bizmetry.io/');
+  };
+
+
+  $scope.goToBrochure = function ($event) {
+    if ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+    }
+    $window.location.replace('https://docs.bizmetry.io/multimedia/brochures/bizmetry-brochure.pdf');
+  };
+
   $scope.goToLogin = function ($event) {
     if ($event) {
       $event.preventDefault();
